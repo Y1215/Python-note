@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="MySQL常用引擎介绍 MyISAM存储引擎：不支持事务、也不支持外键，优势是访问速度快，对事务完整性没有 要求或者以select，insert为主的应用基本上可以用这个引擎来创建表 InnoDB存储引擎：该存储引擎提供了具有提交、回滚和崩溃恢复能力的事务安全。但是对比MyISAM引擎，写的处理效率会差一些，并且会占用更多的磁盘空间以保留数据和索引。 InnoDB存储引擎的特点：支持自动增长列，支">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Y">
+<meta property="og:url" content="http://yoursite.com/2019/05/08/Note/Mysql-note/index.html">
+<meta property="og:site_name" content="Y">
+<meta property="og:description" content="MySQL常用引擎介绍 MyISAM存储引擎：不支持事务、也不支持外键，优势是访问速度快，对事务完整性没有 要求或者以select，insert为主的应用基本上可以用这个引擎来创建表 InnoDB存储引擎：该存储引擎提供了具有提交、回滚和崩溃恢复能力的事务安全。但是对比MyISAM引擎，写的处理效率会差一些，并且会占用更多的磁盘空间以保留数据和索引。 InnoDB存储引擎的特点：支持自动增长列，支">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-05-08T01:09:23.629Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Y">
+<meta name="twitter:description" content="MySQL常用引擎介绍 MyISAM存储引擎：不支持事务、也不支持外键，优势是访问速度快，对事务完整性没有 要求或者以select，insert为主的应用基本上可以用这个引擎来创建表 InnoDB存储引擎：该存储引擎提供了具有提交、回滚和崩溃恢复能力的事务安全。但是对比MyISAM引擎，写的处理效率会差一些，并且会占用更多的磁盘空间以保留数据和索引。 InnoDB存储引擎的特点：支持自动增长列，支">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/05/08/Note/Mysql-note/">
+
+
+
+
+
+  <title> | Y</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Y</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/08/Note/Mysql-note/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YL">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Y">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline"></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-08T09:09:23+08:00">
+                2019-05-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="MySQL常用引擎介绍"><a href="#MySQL常用引擎介绍" class="headerlink" title="MySQL常用引擎介绍"></a>MySQL常用引擎介绍</h3><ul>
+<li>MyISAM存储引擎：不支持事务、也不支持外键，优势是访问速度快，对事务完整性没有 要求或者以select，insert为主的应用基本上可以用这个引擎来创建表</li>
+<li>InnoDB存储引擎：该存储引擎提供了具有提交、回滚和崩溃恢复能力的事务安全。但是对比MyISAM引擎，写的处理效率会差一些，并且会占用更多的磁盘空间以保留数据和索引。 InnoDB存储引擎的特点：支持自动增长列，支持外键约束</li>
+<li>MEMORY存储引擎：Memory存储引擎使用存在于内存中的内容来创建表。每个memory表只实际对应一个磁盘文件，格式是.frm。memory类型的表访问非常的快，因为它的数据是放在内存中的，并且默认使用HASH索引，但是一旦服务关闭，表中的数据就会丢失掉。 MEMORY存储引擎的表可以选择使用BTREE索引或者HASH索引，两种不同类型的索引有其不同的使用范围</li>
+<li>MERGE存储引擎：是一组MyISAM表的组合，这些MyISAM表必须结构完全相同，merge表本身并没有数据，对merge类型的表可以进行查询，更新，删除操作，这些操作实际上是对内部的MyISAM表进行的。</li>
+</ul>
+<h3 id="字符串类型"><a href="#字符串类型" class="headerlink" title="字符串类型"></a>字符串类型</h3><ul>
+<li>数值类型  INT,FLOAT,DOUBLE</li>
+<li>字符串类型  CHAR,VARCHAR,TEXT</li>
+<li>日期和时间类型  DATA,TIME,YEAR,DATETIME</li>
+</ul>
+<h3 id="SQL语言共分为四大类"><a href="#SQL语言共分为四大类" class="headerlink" title="SQL语言共分为四大类"></a>SQL语言共分为四大类</h3><ul>
+<li>数据定义语言DDL</li>
+<li>数据操纵语言DML</li>
+<li>数据查询语言DQL</li>
+<li>数据控制语言DCL</li>
+</ul>
+<h4 id="DDL数据定义语言"><a href="#DDL数据定义语言" class="headerlink" title="DDL数据定义语言"></a>DDL数据定义语言</h4><ul>
+<li>创建数据库<br>CREATE DATABASE 数据库名 CHARACTER SET UTF8</li>
+<li>修改数据库<br>ALTER DATABASE 数据库名 CHARACTER SET GBK</li>
+<li>查看数据库<br>SHOW DATABASES</li>
+<li>添加一列<br>ALTER TABLE 表名 ADD 列名 数据类型</li>
+<li>查看表的字段信息<br>DESC 表名</li>
+<li>修改表的字段类型<br>ALTER TABLE 表名 MODIFY 字段名 数据类型  </li>
+<li>删除一列<br>ALTER TABLE 表名 DROP 字段名</li>
+<li>修改表名<br>RENAME TABLE 原表名 TO 新表名</li>
+<li>查看表的创建细节<br>SHOW CREATE TABLE 表名</li>
+<li>修改表的字符集<br>ALTER TABLE 表名 DEFAULT CHARACTER SET 字符集</li>
+<li>修改表的列名<br>ALTER TABLE 表名 CHANGE 列名 新列名</li>
+<li>删除表<br>DROP TABLE 表名</li>
+</ul>
+<h4 id="DML数据操纵语言-对表中数据进行增删改"><a href="#DML数据操纵语言-对表中数据进行增删改" class="headerlink" title="DML数据操纵语言-对表中数据进行增删改"></a>DML数据操纵语言-对表中数据进行增删改</h4><ul>
+<li>插入数据<br>INSERT INTO 表名（列名1，列名2…) VALUES(列值1，列值2…)</li>
+<li>更新数据<br>UPDATE 表名 SET 列名1=列值1，…<br>WHERE 列名=值  </li>
+<li>删除数据<br>DELETE FROM 表名<br>[WHERE 条件]；<br>TRUNCATE TABLE 表名；<br>两者的区别：DELETE 删除表中的数据，表结构还在；删除后的数据还可以找回  <pre><code>TRUNCATE 将表DROP掉，创建一个新的表，数据无法找回，但删除速度更快
+</code></pre></li>
+</ul>
+<h4 id="DQL数据查询语言"><a href="#DQL数据查询语言" class="headerlink" title="DQL数据查询语言"></a>DQL数据查询语言</h4><ul>
+<li>FROM表，就是对表进行遍历</li>
+<li>SELECT后是运算表达式，应用到每一行，返回一个精准唯一到值；其运算表达式只有三种情况:常量，分组字段，聚合函数</li>
+<li>查询表全部数据<br>SELECT * FROM 表名  </li>
+<li>逐行运算模型</li>
+<li>分组运算模型</li>
+<li>将查询记录转换为大写<br>SELECT UPPER(列名) FROM 表名</li>
+<li>分组查询  <ul>
+<li>GROUP BY + GROUP_CONCAT(字段名)  </li>
+<li>GROUP BY + 聚合函数  </li>
+<li>GROUP BY + HAVING</li>
+</ul>
+</li>
+<li>LIMIT<br>SELECT * FROM 表名 LIMIT 0,3——从第0行开始，查3行</li>
+<li>数据的完整性  <ul>
+<li>实体完整性——表中每一行记录代表一个实体  <ul>
+<li>约束类型<ul>
+<li>主键约束(PRIMARY KEY)  </li>
+<li>唯一约束(UNIQUE)  </li>
+<li>自动增长列(AUTO_INCREMENT)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>域完整性  <ul>
+<li>域完整性约束<ul>
+<li>数据类型:数值类型、日期类型、字符串类型  </li>
+<li>非空约束(NOT NULL)  </li>
+<li>默认值约束(DEFAULT)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>参照完整性——设置外键</li>
+<li>表关系:一对一，一对多，多对多;拆分表的目的是避免出现大量冗余数据</li>
+<li>多表查询   <ul>
+<li>合并结果集——UNION(默认去重) / UNION ALL(显示所有)  </li>
+<li>连接查询——笛卡尔积</li>
+<li>内连接   <ul>
+<li>等值连接 <ul>
+<li>SELECT * FROM stu st<br>INNER JOIN score sc ON st.id = sc.id<br>INNER JOIN course co ON sc.cid = co.cid</li>
+<li>ON 后面只写主外键</li>
+<li>还有其他条件，直接在后面写WHERE</li>
+</ul>
+</li>
+<li>多表连接<ul>
+<li>99连接法</li>
+<li>内联查询 使用INNER JOIN ON 的方式</li>
+</ul>
+</li>
+<li>非等值连接</li>
+</ul>
+</li>
+<li>外连接<ul>
+<li>左外连接 LEFT JOIN</li>
+<li>右外连接 RIGHT JOIN  </li>
+</ul>
+</li>
+<li>子查询<ul>
+<li>where后</li>
+<li>from后</li>
+</ul>
+</li>
+<li>自然连接 NATURAL JOIN</li>
+</ul>
+</li>
+</ul>
+<h4 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h4><ul>
+<li>函数分类<ul>
+<li>字符串函数<ul>
+<li>CONCAT() —— 将传入字符连接成一个字符串，任何字符与NULL连接的结果均为NULL</li>
+<li>INSERT(‘str’,x,y,’instr’) —— 将字符串str从x位置开始，y个字符长度替换为instr字符串</li>
+<li>LOWER()和UPPER() —— LOWER()将字符串全部转为小写；UPPER()将字符串全部转为大写。</li>
+<li>LEFT(str,x) 与 RIGHT(str,x) —— 从字符串左边或右边取x位字符</li>
+<li>LPAD(‘str’,x,pad) 与 RPAD() —— 从字符串左边或右边用pad字符串进行填充，直到字符串位数达到要求的x位</li>
+<li>LTRIM(str) 与 RTRIM(str) —— 去掉字符串中最左侧或最右侧的空格</li>
+<li>TRIM(str) —— 去掉字符串左右两侧的空格</li>
+<li>REPEAT(str,x) —— 返回str重复x次的结果</li>
+<li>REPLACE(str,a,b) —— 将字符串中a字符串替换成b字符串</li>
+<li>SUBSTRING(str,x,y) —— 返回字符串str从第x位起y个字节长度的字符串</li>
+</ul>
+</li>
+<li>数值函数<ul>
+<li>ABS(x) —— x的绝对值</li>
+<li>CEIL(x) —— 向上取整</li>
+<li>FLOOR(x) —— 向下取整</li>
+<li>MOD(x,y) —— x/y的模,即余数</li>
+<li>RAND() —— 0-1取随机值</li>
+</ul>
+</li>
+<li>日期和时间函数<ul>
+<li>CURDATE() —— 返回当前日期，只包含年月日</li>
+<li>CURTIME() —— 返回当前时间，只包含时分秒</li>
+<li>NOW() —— 返回当前日期与时间，年月日时分秒</li>
+<li>UNIX_TIMESTAMP() —— 返回当前日期的时间戳</li>
+<li>FROM_UNIXTIME(unixtime) —— 将时间戳转换成日期</li>
+<li>WEEK(DATE) —— 返回当前是一年中的第几周</li>
+<li>YEAR(DATE) —— 返回当前是哪一年</li>
+<li>HOUR(TIME) —— 返回当前是几点</li>
+<li>MINUTE(TIME) —— 返回当前是几分</li>
+<li>DATE_FORMAT(date,format) —— 按字符串格式化日期date值</li>
+<li>DATE_ADD(date,INTERVAL expr unit) —— 计算日期间隔</li>
+<li>DATEDIFF(DATE1,DATE2) —— 计算两个日期相差天数</li>
+</ul>
+</li>
+<li>流程函数<ul>
+<li>IF(value,T,F) —— 如果value是真，返回T，否则返回F</li>
+<li>IFNULL(value1,value2) —— 如果value1不为空，则返回value1否则返回value2</li>
+<li>CASE <strong>_case_value_</strong> WHEN _<strong>when_value</strong>_ THEN _<strong>statement_list</strong>_ ELSE _<strong>statement_list</strong>_  END CASE;</li>
+</ul>
+</li>
+<li>其他常用函数<ul>
+<li>DATABASE() —— 返回当前数据库名</li>
+<li>VERSION() —— 返回当前数据库版本</li>
+<li>USER() —— 返回当前登录用户名</li>
+<li>PASSWORD(str) —— 对str进行加密</li>
+<li>MD5(str) —— 返回str对MD5值</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h4><ul>
+<li>事务是不可分割的操纵，每一条sql语句都是一个事务，事务只对DML语句有效</li>
+<li>事务的ACID<ul>
+<li>原子性(Atomicity) —— 要么都做，要么都不做。</li>
+<li>一致性(Consistency) —— 与原子性相关，多个事物的一致，数据的一致。</li>
+<li>隔离性(Isolation) —— 一个事物的执行不能被其他事物干扰。</li>
+<li>持久性(Durability) —— 一旦提交，对数据库中的数据的改变是永久性的。</li>
+</ul>
+</li>
+<li>事务的使用<ul>
+<li>开始事务 START TRANSACTION</li>
+<li>提交事务 COMMIT</li>
+<li>回滚事务 ROLLBACK</li>
+</ul>
+</li>
+<li>事务并发问题与隔离级别<br> 事务隔离级别 | 脏数据 | 不可重复读 | 幻读<br> -|-|-|-<br> 读未提交(Read uncommitted) | 是 | 是 | 是 |<br> 不可重复读(Read committed) | 否 | 是 | 是 |<br> 可重复读(Repeatable read) | 否 | 否 | 是 |<br> 串行化(Serializable) | 否 | 否 | 否 |  </li>
+</ul>
+<h4 id="权限"><a href="#权限" class="headerlink" title="权限"></a>权限</h4><ul>
+<li>授予权限<br>GRANT &lt;权限&gt;<br>ON &lt;对象类型&gt;&lt;对象名&gt;<br>TO &lt;用户&gt;<br>[WITH GRANT OPTION] —— 可以将获得的权限授予其他用户</li>
+<li>授予权限<br>GRANT &lt;权限&gt;<br>ON &lt;对象类型&gt;&lt;对象名&gt;<br>TO &lt;用户&gt;<br>[WITH GRANT OPTION] —— 可以将获得的权限授予其他用户</li>
+</ul>
+<h4 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h4><ul>
+<li>索引优劣势<ul>
+<li>优势</li>
+<li>劣势</li>
+</ul>
+</li>
+<li>索引的分类<ul>
+<li>单值索引</li>
+<li>唯一索引</li>
+<li>复合索引</li>
+<li>全文索引</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/10/Note/Python-note4/" rel="next" title>
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/14/Note/mongoDB-note/" rel="prev" title>
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="YL">
+            
+              <p class="site-author-name" itemprop="name">YL</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://llluno.github.io/" title="llluno" target="_blank">llluno</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#MySQL常用引擎介绍"><span class="nav-number">1.</span> <span class="nav-text">MySQL常用引擎介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串类型"><span class="nav-number">2.</span> <span class="nav-text">字符串类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SQL语言共分为四大类"><span class="nav-number">3.</span> <span class="nav-text">SQL语言共分为四大类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#DDL数据定义语言"><span class="nav-number">3.1.</span> <span class="nav-text">DDL数据定义语言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DML数据操纵语言-对表中数据进行增删改"><span class="nav-number">3.2.</span> <span class="nav-text">DML数据操纵语言-对表中数据进行增删改</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DQL数据查询语言"><span class="nav-number">3.3.</span> <span class="nav-text">DQL数据查询语言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常用函数"><span class="nav-number">3.4.</span> <span class="nav-text">常用函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#事务"><span class="nav-number">3.5.</span> <span class="nav-text">事务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#权限"><span class="nav-number">3.6.</span> <span class="nav-text">权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#索引"><span class="nav-number">3.7.</span> <span class="nav-text">索引</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">YL</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+
+<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+</body>
+</html>
