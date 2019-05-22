@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Y">
 <meta property="og:description" content="Map、Filter、reduce、os模块、time模块、正则表达、异常处理">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-22T01:42:51.434Z">
+<meta property="og:updated_time" content="2019-05-22T02:37:45.544Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python-note2">
 <meta name="twitter:description" content="Map、Filter、reduce、os模块、time模块、正则表达、异常处理">
@@ -187,6 +187,16 @@
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
             首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
           </a>
         </li>
       
@@ -300,7 +310,7 @@
       
 
       
-        <p>Map、Filter、reduce、os模块、time模块、正则表达、异常处理<br><a id="more"></a></p>
+        <p><center>Map、Filter、reduce、os模块、time模块、正则表达、异常处理</center><br><a id="more"></a></p>
 <h2 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h2><p>Map会将一个函数映射到一个输入列表的所有元素上。</p>
 <h3 id="规范"><a href="#规范" class="headerlink" title="规范"></a>规范</h3><p>map(function_to_apply, list_of_inputs)<br>通常的方法<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">items = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line">squared = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> items:</span><br><span class="line">    squared.append(i**<span class="number">2</span>)</span><br></pre></td></tr></table></figure></p>
 <p>用Map实现<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">squared = list(map(lambda x: x**2, items))</span><br></pre></td></tr></table></figure></p>
