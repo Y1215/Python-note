@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Map、Filter、reduce、os模块、time模块、正则表达、异常处理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python-note2">
+<meta property="og:url" content="http://yoursite.com/2019/05/22/python-note2/index.html">
+<meta property="og:site_name" content="Y">
+<meta property="og:description" content="Map、Filter、reduce、os模块、time模块、正则表达、异常处理">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-05-22T01:38:54.674Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python-note2">
+<meta name="twitter:description" content="Map、Filter、reduce、os模块、time模块、正则表达、异常处理">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/05/22/python-note2/">
+
+
+
+
+
+  <title>python-note2 | Y</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Y</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/22/python-note2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YL">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Y">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">python-note2</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-22T09:33:01+08:00">
+                2019-05-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Map、Filter、reduce、os模块、time模块、正则表达、异常处理<br><a id="more"></a></p>
+<h2 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h2><p>Map会将一个函数映射到一个输入列表的所有元素上。</p>
+<h3 id="规范"><a href="#规范" class="headerlink" title="规范"></a>规范</h3><p>map(function_to_apply, list_of_inputs)<br>通常的方法<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">items = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line">squared = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> items:</span><br><span class="line">    squared.append(i**<span class="number">2</span>)</span><br></pre></td></tr></table></figure></p>
+<p>用Map实现<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">squared = list(map(lambda x: x**2, items))</span><br></pre></td></tr></table></figure></p>
+<h2 id="Filter"><a href="#Filter" class="headerlink" title="Filter"></a>Filter</h2><p>filter过滤列表中的元素，并且返回一个由所有符合要求的元素所构成的列表，符合要求即函数映射到该元素时返回值为True.<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">number_list = range(<span class="number">-5</span>, <span class="number">5</span>)</span><br><span class="line">less_than_zero = filter(<span class="keyword">lambda</span> x: x &lt; <span class="number">0</span>, number_list)</span><br><span class="line">print(list(less_than_zero))</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>Output: [-5, -4, -3, -2, -1]</p>
+</blockquote>
+<h2 id="reduce"><a href="#reduce" class="headerlink" title="reduce"></a>reduce</h2><ul>
+<li>reduce() 函数会对参数序列中元素进行累积。</li>
+<li>函数将一个数据集合（链表，元组等）中的所有数据进行下列操作：用传给 reduce 中的函数 function（有两个参数）先对集合中的第 1、2 个元素进行操作，得到的结果再与第三个数据用 function 函数运算，最后得到一个结果。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> reduce</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span><span class="params">(x, y)</span> :</span></span><br><span class="line">    <span class="keyword">return</span> x + y</span><br><span class="line"></span><br><span class="line">print(reduce(add, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]))</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="文件状态"><a href="#文件状态" class="headerlink" title="文件状态"></a>文件状态</h1><h2 id="os模块"><a href="#os模块" class="headerlink" title="os模块"></a>os模块</h2><h2 id="time模块"><a href="#time模块" class="headerlink" title="time模块"></a>time模块</h2><h2 id="open-的不同模式"><a href="#open-的不同模式" class="headerlink" title="open()的不同模式"></a>open()的不同模式</h2><ul>
+<li>r     以读方式打开文件，可读取文件信息。</li>
+<li>w     以写方式打开文件，可向文件写入信息。如文件存在，则清空该文件，再写入新内容</li>
+<li>a     以追加模式打开文件（即一打开文件，文件指针自动移到文件末尾），如果文件不存在则创建</li>
+<li>r+ 以读写方式打开文件，可对文件进行读和写操作。</li>
+<li>w+ 消除文件内容，然后以读写方式打开文件。</li>
+<li>a+ 以读写方式打开文件，并把文件指针移到文件尾。</li>
+<li>b     以二进制模式打开文件，而不是以文本模式。该模式只对 Windows 或 Dos 有效，类 Unix 的文件是用二进制模式进行操作的。</li>
+</ul>
+<h3 id="内建函数"><a href="#内建函数" class="headerlink" title="内建函数"></a>内建函数</h3><ul>
+<li>fp.read([size]) #size为读取的长度，以byte为单位 </li>
+<li>fp.readline([size]) #读一行，如果定义了size，有可能返回的只是一行的一部分 ,如果超过，则返回一行到\n </li>
+<li>fp.readlines([size]) #把文件每一行作为一个list的一个成员，并返回这个list。其实它的内部是通过循环调用readline()来实现的。如果提供size参数，size是表示读取内容的总长，也就是说可能只读到文件的一部分。 </li>
+<li>fp.write(str) #把str写到文件中，write()并不会在str后加上一个换行符 </li>
+<li>fp.writelines(seq) #把seq的内容全部写到文件中(多行一次性写入)。这个函数也只是忠实地写入，不会在每行后面加上任何东西。 </li>
+<li>fp.close() #关闭文件。python会在一个文件不用后自动关闭文件，不过这一功能没有保证，最好还是养成自己关闭的习惯。 如果一个文件在关闭后还对其进行操作会产生ValueError </li>
+<li>fp.flush() #把缓冲区的内容写入硬盘 </li>
+<li>fp.fileno() #返回一个长整型的”文件标签“ </li>
+<li>fp.isatty() #文件是否是一个终端设备文件（unix系统中的） </li>
+<li>fp.tell() #返回文件操作标记的当前位置，以文件的开头为原点 </li>
+<li>fp.next() #返回下一行，并将文件操作标记位移到下一行。把一个file用于for … in file这样的语句时，就是调用next()函数来实现遍历的。 </li>
+<li>fp.seek(offset[,whence]) #将文件打操作标记移到offset的位置。这个offset一般是相对于文件的开头来计算的，一般为正数。但如果提供了whence参数就不一定了，whence可以为0表示从头开始计算，1表示以当前位置为原点计算。2表示以文件末尾为原点进行计算。需要注意，如果文件以a或a+的模式打开，每次进行写操作时，文件操作标记会自动返回到文件末尾。 </li>
+<li>fp.truncate([size]) #把文件裁成规定的大小，默认的是裁到当前文件操作标记的位置。如果size比文件的大小还要大，依据系统的不同可能是不改变文件，也可能是用0把文件补到相应的大小，也可能是以一些随机的内容加上去。</li>
+</ul>
+<h2 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h2><h3 id="元字符"><a href="#元字符" class="headerlink" title="元字符"></a>元字符</h3><ul>
+<li>.     匹配除换行符以外的任意字符</li>
+<li>\w 匹配字母或数字或下划线或汉字</li>
+<li>\s 匹配任意的空白符</li>
+<li>\d 匹配数字</li>
+<li>\b 匹配单词的开始或结束</li>
+<li>^  匹配字符串的开始</li>
+<li>$     匹配字符串的结束</li>
+</ul>
+<h3 id="重复"><a href="#重复" class="headerlink" title="重复"></a>重复</h3><ul>
+<li>*    重复零次或更多次</li>
+<li>+    重复一次或更多次</li>
+<li>?        重复零次或一次</li>
+<li>{n}    重复n次</li>
+<li>{n,}    重复n次或更多次</li>
+<li>{n,m}    重复n到m次<h3 id="分组"><a href="#分组" class="headerlink" title="分组"></a>分组</h3></li>
+<li>(\d{1,3}.){3}<br>()重复三次</li>
+</ul>
+<h3 id="re-模块"><a href="#re-模块" class="headerlink" title="re 模块"></a>re 模块</h3><p>re.match</p>
+<ul>
+<li>切分字符串<br>re.split</li>
+</ul>
+<h3 id="贪婪与懒惰"><a href="#贪婪与懒惰" class="headerlink" title="贪婪与懒惰"></a>贪婪与懒惰</h3><h4 id="贪婪匹配"><a href="#贪婪匹配" class="headerlink" title="贪婪匹配"></a>贪婪匹配</h4><ul>
+<li>a.*b，它将会匹配最长的以 a 开始，以 b 结束的字符串。如果用它来搜索 aabab 的话，它会匹配整个字符串 aabab。这被称为贪婪匹配。</li>
+</ul>
+<h4 id="懒惰匹配"><a href="#懒惰匹配" class="headerlink" title="懒惰匹配"></a>懒惰匹配</h4><ul>
+<li>*?     重复任意次，但尽可能少重复</li>
+<li>+?     重复1次或更多次，但尽可能少重复</li>
+<li>??     重复0次或1次，但尽可能少重复</li>
+<li>{n,m}? 重复n到m次，但尽可能少重复</li>
+<li>{n,}?     重复n次以上，但尽可能少重复</li>
+</ul>
+<h2 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h2><h3 id="NameError异常"><a href="#NameError异常" class="headerlink" title="NameError异常"></a>NameError异常</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(dave)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p> –&gt;NameError: name ‘dave’ is not defined</p>
+</blockquote>
+<h3 id="ZeroDivisionError-除数为零"><a href="#ZeroDivisionError-除数为零" class="headerlink" title="ZeroDivisionError: 除数为零"></a>ZeroDivisionError: 除数为零</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="number">1</span>/<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>–&gt;ZeroDivisionError: division by zero</p>
+</blockquote>
+<h3 id="SyntaxError-Python-语法错误"><a href="#SyntaxError-Python-语法错误" class="headerlink" title="SyntaxError: Python 语法错误"></a>SyntaxError: Python 语法错误</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="keyword">for</span>)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>–&gt;SyntaxError: invalid syntax</p>
+</blockquote>
+<h3 id="IndexError-请求的索引超出序列范围"><a href="#IndexError-请求的索引超出序列范围" class="headerlink" title="IndexError:请求的索引超出序列范围"></a>IndexError:请求的索引超出序列范围</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a=[]</span><br><span class="line">print(a[<span class="number">0</span>])</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>–&gt;IndexError: list index out of range</p>
+</blockquote>
+<h3 id="KeyError-请求一个不存在的字典关键字"><a href="#KeyError-请求一个不存在的字典关键字" class="headerlink" title="KeyError:请求一个不存在的字典关键字"></a>KeyError:请求一个不存在的字典关键字</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">aDict = &#123;<span class="string">'host'</span>: <span class="string">'earth'</span>, <span class="string">'port'</span>: <span class="number">80</span>&#125;</span><br><span class="line">print(aDict[<span class="string">'server'</span>])</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>–&gt;KeyError: ‘server’</p>
+</blockquote>
+<h3 id="IOError-输入-输出错误"><a href="#IOError-输入-输出错误" class="headerlink" title="IOError: 输入/输出错误"></a>IOError: 输入/输出错误</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">f=open(<span class="string">'anqing.txt'</span>)</span><br><span class="line">print(f)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>–&gt;IOError: [Errno 2] No such file or directory: ‘anqing.txt’</p>
+</blockquote>
+<h3 id="AttributeError-尝试访问未知的物件属性"><a href="#AttributeError-尝试访问未知的物件属性" class="headerlink" title="AttributeError: 尝试访问未知的物件属性"></a>AttributeError: 尝试访问未知的物件属性</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">myClass</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">myInst = myClass()</span><br><span class="line">myInst.bar = <span class="string">'spam'</span></span><br><span class="line">print(myInst.bar)</span><br><span class="line">print(myInst.dave)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>–&gt;AttributeError: ‘myClass’ object has no attribute ‘dave’</p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/22/python-note1/" rel="next" title="python-note1">
+                <i class="fa fa-chevron-left"></i> python-note1
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="YL">
+            
+              <p class="site-author-name" itemprop="name">YL</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://llluno.github.io/" title="llluno" target="_blank">llluno</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Map"><span class="nav-number">1.</span> <span class="nav-text">Map</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#规范"><span class="nav-number">1.1.</span> <span class="nav-text">规范</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Filter"><span class="nav-number">2.</span> <span class="nav-text">Filter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reduce"><span class="nav-number">3.</span> <span class="nav-text">reduce</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#文件状态"><span class="nav-number"></span> <span class="nav-text">文件状态</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#os模块"><span class="nav-number">1.</span> <span class="nav-text">os模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#time模块"><span class="nav-number">2.</span> <span class="nav-text">time模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#open-的不同模式"><span class="nav-number">3.</span> <span class="nav-text">open()的不同模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#内建函数"><span class="nav-number">3.1.</span> <span class="nav-text">内建函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正则表达式"><span class="nav-number">4.</span> <span class="nav-text">正则表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#元字符"><span class="nav-number">4.1.</span> <span class="nav-text">元字符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重复"><span class="nav-number">4.2.</span> <span class="nav-text">重复</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分组"><span class="nav-number">4.3.</span> <span class="nav-text">分组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#re-模块"><span class="nav-number">4.4.</span> <span class="nav-text">re 模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#贪婪与懒惰"><span class="nav-number">4.5.</span> <span class="nav-text">贪婪与懒惰</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#贪婪匹配"><span class="nav-number">4.5.1.</span> <span class="nav-text">贪婪匹配</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#懒惰匹配"><span class="nav-number">4.5.2.</span> <span class="nav-text">懒惰匹配</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异常"><span class="nav-number">5.</span> <span class="nav-text">异常</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NameError异常"><span class="nav-number">5.1.</span> <span class="nav-text">NameError异常</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ZeroDivisionError-除数为零"><span class="nav-number">5.2.</span> <span class="nav-text">ZeroDivisionError: 除数为零</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SyntaxError-Python-语法错误"><span class="nav-number">5.3.</span> <span class="nav-text">SyntaxError: Python 语法错误</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IndexError-请求的索引超出序列范围"><span class="nav-number">5.4.</span> <span class="nav-text">IndexError:请求的索引超出序列范围</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#KeyError-请求一个不存在的字典关键字"><span class="nav-number">5.5.</span> <span class="nav-text">KeyError:请求一个不存在的字典关键字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IOError-输入-输出错误"><span class="nav-number">5.6.</span> <span class="nav-text">IOError: 输入/输出错误</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AttributeError-尝试访问未知的物件属性"><span class="nav-number">5.7.</span> <span class="nav-text">AttributeError: 尝试访问未知的物件属性</span></a></li></ol></li></ol></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">YL</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+
+<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+</body>
+</html>
