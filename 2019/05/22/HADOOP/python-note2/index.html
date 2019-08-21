@@ -83,11 +83,11 @@
 <meta name="keywords" content="python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python-note2">
-<meta property="og:url" content="http://yoursite.com/2019/05/22/python-note2/index.html">
+<meta property="og:url" content="http://yoursite.com/2019/05/22/HADOOP/python-note2/index.html">
 <meta property="og:site_name" content="Y">
 <meta property="og:description" content="Map、Filter、reduce、os模块、time模块、正则表达、异常处理">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-22T02:37:45.544Z">
+<meta property="og:updated_time" content="2019-08-21T09:59:32.999Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python-note2">
 <meta name="twitter:description" content="Map、Filter、reduce、os模块、time模块、正则表达、异常处理">
@@ -120,7 +120,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/05/22/python-note2/">
+  <link rel="canonical" href="http://yoursite.com/2019/05/22/HADOOP/python-note2/">
 
 
 
@@ -243,7 +243,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/22/python-note2/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/22/HADOOP/python-note2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="YL">
@@ -283,6 +283,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -310,17 +332,28 @@
       
 
       
-        <p><center>Map、Filter、reduce、os模块、time模块、正则表达、异常处理</center><br><a id="more"></a></p>
-<h2 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h2><p>Map会将一个函数映射到一个输入列表的所有元素上。</p>
-<h3 id="规范"><a href="#规范" class="headerlink" title="规范"></a>规范</h3><p>map(function_to_apply, list_of_inputs)<br>通常的方法<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">items = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line">squared = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> items:</span><br><span class="line">    squared.append(i**<span class="number">2</span>)</span><br></pre></td></tr></table></figure></p>
-<p>用Map实现<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">squared = list(map(lambda x: x**2, items))</span><br></pre></td></tr></table></figure></p>
-<h2 id="Filter"><a href="#Filter" class="headerlink" title="Filter"></a>Filter</h2><p>filter过滤列表中的元素，并且返回一个由所有符合要求的元素所构成的列表，符合要求即函数映射到该元素时返回值为True.<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">number_list = range(<span class="number">-5</span>, <span class="number">5</span>)</span><br><span class="line">less_than_zero = filter(<span class="keyword">lambda</span> x: x &lt; <span class="number">0</span>, number_list)</span><br><span class="line">print(list(less_than_zero))</span><br></pre></td></tr></table></figure></p>
+        <center>Map、Filter、reduce、os模块、time模块、正则表达、异常处理</center>
+<a id="more"></a>
+## Map
+Map会将一个函数映射到一个输入列表的所有元素上。
+### 规范
+map(function_to_apply, list_of_inputs)  
+通常的方法
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">items = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line">squared = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> items:</span><br><span class="line">    squared.append(i**<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+
+<p>用Map实现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">squared = list(map(lambda x: x**2, items))</span><br></pre></td></tr></table></figure>
+
+<h2 id="Filter"><a href="#Filter" class="headerlink" title="Filter"></a>Filter</h2><p>filter过滤列表中的元素，并且返回一个由所有符合要求的元素所构成的列表，符合要求即函数映射到该元素时返回值为True. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">number_list = range(<span class="number">-5</span>, <span class="number">5</span>)</span><br><span class="line">less_than_zero = filter(<span class="keyword">lambda</span> x: x &lt; <span class="number">0</span>, number_list)</span><br><span class="line">print(list(less_than_zero))</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>Output: [-5, -4, -3, -2, -1]</p>
 </blockquote>
 <h2 id="reduce"><a href="#reduce" class="headerlink" title="reduce"></a>reduce</h2><ul>
 <li>reduce() 函数会对参数序列中元素进行累积。</li>
 <li>函数将一个数据集合（链表，元组等）中的所有数据进行下列操作：用传给 reduce 中的函数 function（有两个参数）先对集合中的第 1、2 个元素进行操作，得到的结果再与第三个数据用 function 函数运算，最后得到一个结果。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> reduce</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span><span class="params">(x, y)</span> :</span></span><br><span class="line">    <span class="keyword">return</span> x + y</span><br><span class="line"></span><br><span class="line">print(reduce(add, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]))</span><br></pre></td></tr></table></figure>
+
 </li>
 </ul>
 <h1 id="文件状态"><a href="#文件状态" class="headerlink" title="文件状态"></a>文件状态</h1><h2 id="os模块"><a href="#os模块" class="headerlink" title="os模块"></a>os模块</h2><h2 id="time模块"><a href="#time模块" class="headerlink" title="time模块"></a>time模块</h2><h2 id="open-的不同模式"><a href="#open-的不同模式" class="headerlink" title="open()的不同模式"></a>open()的不同模式</h2><ul>
@@ -380,30 +413,37 @@
 <li>{n,}?     重复n次以上，但尽可能少重复</li>
 </ul>
 <h2 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h2><h3 id="NameError异常"><a href="#NameError异常" class="headerlink" title="NameError异常"></a>NameError异常</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(dave)</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p> –&gt;NameError: name ‘dave’ is not defined</p>
 </blockquote>
 <h3 id="ZeroDivisionError-除数为零"><a href="#ZeroDivisionError-除数为零" class="headerlink" title="ZeroDivisionError: 除数为零"></a>ZeroDivisionError: 除数为零</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="number">1</span>/<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>–&gt;ZeroDivisionError: division by zero</p>
 </blockquote>
 <h3 id="SyntaxError-Python-语法错误"><a href="#SyntaxError-Python-语法错误" class="headerlink" title="SyntaxError: Python 语法错误"></a>SyntaxError: Python 语法错误</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="keyword">for</span>)</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>–&gt;SyntaxError: invalid syntax</p>
 </blockquote>
 <h3 id="IndexError-请求的索引超出序列范围"><a href="#IndexError-请求的索引超出序列范围" class="headerlink" title="IndexError:请求的索引超出序列范围"></a>IndexError:请求的索引超出序列范围</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a=[]</span><br><span class="line">print(a[<span class="number">0</span>])</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>–&gt;IndexError: list index out of range</p>
 </blockquote>
 <h3 id="KeyError-请求一个不存在的字典关键字"><a href="#KeyError-请求一个不存在的字典关键字" class="headerlink" title="KeyError:请求一个不存在的字典关键字"></a>KeyError:请求一个不存在的字典关键字</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">aDict = &#123;<span class="string">'host'</span>: <span class="string">'earth'</span>, <span class="string">'port'</span>: <span class="number">80</span>&#125;</span><br><span class="line">print(aDict[<span class="string">'server'</span>])</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>–&gt;KeyError: ‘server’</p>
 </blockquote>
 <h3 id="IOError-输入-输出错误"><a href="#IOError-输入-输出错误" class="headerlink" title="IOError: 输入/输出错误"></a>IOError: 输入/输出错误</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">f=open(<span class="string">'anqing.txt'</span>)</span><br><span class="line">print(f)</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>–&gt;IOError: [Errno 2] No such file or directory: ‘anqing.txt’</p>
 </blockquote>
 <h3 id="AttributeError-尝试访问未知的物件属性"><a href="#AttributeError-尝试访问未知的物件属性" class="headerlink" title="AttributeError: 尝试访问未知的物件属性"></a>AttributeError: 尝试访问未知的物件属性</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">myClass</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">myInst = myClass()</span><br><span class="line">myInst.bar = <span class="string">'spam'</span></span><br><span class="line">print(myInst.bar)</span><br><span class="line">print(myInst.dave)</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>–&gt;AttributeError: ‘myClass’ object has no attribute ‘dave’</p>
 </blockquote>
@@ -437,7 +477,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/22/python-note1/" rel="next" title="python-note1">
+              <a href="/2019/05/22/HADOOP/python-note1/" rel="next" title="python-note1">
                 <i class="fa fa-chevron-left"></i> python-note1
               </a>
             
@@ -447,7 +487,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/05/22/django-note/" rel="prev" title="django-note">
+              <a href="/2019/05/22/Day1/django-note/" rel="prev" title="django-note">
                 django-note <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -528,12 +568,21 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
             
 
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
             
 
             
@@ -588,7 +637,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Map"><span class="nav-number">1.</span> <span class="nav-text">Map</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#规范"><span class="nav-number">1.1.</span> <span class="nav-text">规范</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Filter"><span class="nav-number">2.</span> <span class="nav-text">Filter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reduce"><span class="nav-number">3.</span> <span class="nav-text">reduce</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#文件状态"><span class="nav-number"></span> <span class="nav-text">文件状态</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#os模块"><span class="nav-number">1.</span> <span class="nav-text">os模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#time模块"><span class="nav-number">2.</span> <span class="nav-text">time模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#open-的不同模式"><span class="nav-number">3.</span> <span class="nav-text">open()的不同模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#内建函数"><span class="nav-number">3.1.</span> <span class="nav-text">内建函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正则表达式"><span class="nav-number">4.</span> <span class="nav-text">正则表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#元字符"><span class="nav-number">4.1.</span> <span class="nav-text">元字符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重复"><span class="nav-number">4.2.</span> <span class="nav-text">重复</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分组"><span class="nav-number">4.3.</span> <span class="nav-text">分组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#re-模块"><span class="nav-number">4.4.</span> <span class="nav-text">re 模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#贪婪与懒惰"><span class="nav-number">4.5.</span> <span class="nav-text">贪婪与懒惰</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#贪婪匹配"><span class="nav-number">4.5.1.</span> <span class="nav-text">贪婪匹配</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#懒惰匹配"><span class="nav-number">4.5.2.</span> <span class="nav-text">懒惰匹配</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异常"><span class="nav-number">5.</span> <span class="nav-text">异常</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NameError异常"><span class="nav-number">5.1.</span> <span class="nav-text">NameError异常</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ZeroDivisionError-除数为零"><span class="nav-number">5.2.</span> <span class="nav-text">ZeroDivisionError: 除数为零</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SyntaxError-Python-语法错误"><span class="nav-number">5.3.</span> <span class="nav-text">SyntaxError: Python 语法错误</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IndexError-请求的索引超出序列范围"><span class="nav-number">5.4.</span> <span class="nav-text">IndexError:请求的索引超出序列范围</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#KeyError-请求一个不存在的字典关键字"><span class="nav-number">5.5.</span> <span class="nav-text">KeyError:请求一个不存在的字典关键字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IOError-输入-输出错误"><span class="nav-number">5.6.</span> <span class="nav-text">IOError: 输入/输出错误</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AttributeError-尝试访问未知的物件属性"><span class="nav-number">5.7.</span> <span class="nav-text">AttributeError: 尝试访问未知的物件属性</span></a></li></ol></li></ol></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Filter"><span class="nav-number">1.</span> <span class="nav-text">Filter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reduce"><span class="nav-number">2.</span> <span class="nav-text">reduce</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#文件状态"><span class="nav-number"></span> <span class="nav-text">文件状态</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#os模块"><span class="nav-number">1.</span> <span class="nav-text">os模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#time模块"><span class="nav-number">2.</span> <span class="nav-text">time模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#open-的不同模式"><span class="nav-number">3.</span> <span class="nav-text">open()的不同模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#内建函数"><span class="nav-number">3.1.</span> <span class="nav-text">内建函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正则表达式"><span class="nav-number">4.</span> <span class="nav-text">正则表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#元字符"><span class="nav-number">4.1.</span> <span class="nav-text">元字符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重复"><span class="nav-number">4.2.</span> <span class="nav-text">重复</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分组"><span class="nav-number">4.3.</span> <span class="nav-text">分组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#re-模块"><span class="nav-number">4.4.</span> <span class="nav-text">re 模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#贪婪与懒惰"><span class="nav-number">4.5.</span> <span class="nav-text">贪婪与懒惰</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#贪婪匹配"><span class="nav-number">4.5.1.</span> <span class="nav-text">贪婪匹配</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#懒惰匹配"><span class="nav-number">4.5.2.</span> <span class="nav-text">懒惰匹配</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异常"><span class="nav-number">5.</span> <span class="nav-text">异常</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NameError异常"><span class="nav-number">5.1.</span> <span class="nav-text">NameError异常</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ZeroDivisionError-除数为零"><span class="nav-number">5.2.</span> <span class="nav-text">ZeroDivisionError: 除数为零</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SyntaxError-Python-语法错误"><span class="nav-number">5.3.</span> <span class="nav-text">SyntaxError: Python 语法错误</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IndexError-请求的索引超出序列范围"><span class="nav-number">5.4.</span> <span class="nav-text">IndexError:请求的索引超出序列范围</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#KeyError-请求一个不存在的字典关键字"><span class="nav-number">5.5.</span> <span class="nav-text">KeyError:请求一个不存在的字典关键字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IOError-输入-输出错误"><span class="nav-number">5.6.</span> <span class="nav-text">IOError: 输入/输出错误</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AttributeError-尝试访问未知的物件属性"><span class="nav-number">5.7.</span> <span class="nav-text">AttributeError: 尝试访问未知的物件属性</span></a></li></ol></li></ol></li></div>
             
 
           </div>

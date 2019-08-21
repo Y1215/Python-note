@@ -1,0 +1,48 @@
+<hr>
+<p>title: django-note<br>date: 2019-05-22 20:21:34<br>tags: django</p>
+<hr>
+<center>ubuntu中创建django</center>
+<!-- more -->
+#### ubuntu中创建django项目  
+1.安装pip —— sudo apt install python-pip  
+安装pip3 —— sudo apt install python-pip3
+
+<p>2.创建虚拟环境</p>
+<ul>
+<li>安装virtualenv —— pip install virtualenv</li>
+<li>创建虚拟环境 —— virtualenv -p 路径 虚拟环境的名字 或 virtualenv 虚拟环境的命令</li>
+<li>激活虚拟环境 —— source py3env/bin/activate</li>
+<li>安装django —— pip install django==版本号</li>
+<li>退出虚拟环境，输入命令 —— deactivate</li>
+</ul>
+<p>3.新建一个django项目</p>
+<ul>
+<li>django-admin.py startproject 项目名称</li>
+<li>django-admin.py startapp app名称</li>
+<li>在pycharm 打开该项目</li>
+<li>添加虚拟环境<br>(1)找到setting<br>(2)在setting找到Project<br>(3)project interpreter<br>(4)添加add<br>(5)选择Exixting enviroment 找到路径<br>(6)apply –&gt; ok</li>
+<li>启动项目 —— 找到terminal 输入 python manage.py runserver 指定ip:指定端口</li>
+</ul>
+<p>4.app</p>
+<ul>
+<li>在app文件夹下创建urls.py<ul>
+<li>urlpatterns = [url(r’^路径名称/‘, 名称),]</li>
+</ul>
+</li>
+<li>settings.py<ul>
+<li>INSTALLED_APPS 添加app</li>
+</ul>
+</li>
+</ul>
+<p>5.project</p>
+<ul>
+<li>项目文件夹下的urls.py中添加url(r’^app名称/‘,include(app名称.urls)),</li>
+</ul>
+<p>6.templates</p>
+<ul>
+<li>创建templates文件夹，在文件夹下创建html文件</li>
+<li>在settings.py下 TEMPLATES <ul>
+<li>‘DIRS’: [os.path.join(BASE_DIR, ‘templates’)],</li>
+</ul>
+</li>
+</ul>
