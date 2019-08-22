@@ -87,10 +87,13 @@
 <meta property="og:site_name" content="Y">
 <meta property="og:description" content="Hadoop集群搭建">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-22T02:09:10.420Z">
+<meta property="og:image" content="http://yoursite.com/2019/08/21/BigData/Hadoop/hadoop-env.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/21/BigData/Hadoop/yarn-env.png">
+<meta property="og:updated_time" content="2019-08-22T08:08:38.678Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hadoop">
 <meta name="twitter:description" content="Hadoop集群搭建">
+<meta name="twitter:image" content="http://yoursite.com/2019/08/21/BigData/Hadoop/hadoop-env.png">
 
 
 
@@ -356,71 +359,159 @@
         <h1 id="Hadoop集群搭建"><a href="#Hadoop集群搭建" class="headerlink" title="Hadoop集群搭建"></a><center>Hadoop集群搭建</center></h1><a id="more"></a>
 
 
-<h1 id="1-切换root用户"><a href="#1-切换root用户" class="headerlink" title="1.切换root用户"></a>1.切换root用户</h1><ul>
-<li>CentOS7修改root用户密码  <ul>
-<li>[root@localhost ~]# sudo passwd  </li>
-<li>Password：当前用户密码  </li>
-<li>New password：root密码  </li>
-<li>Retype new password: 重复root密码  </li>
-</ul>
-</li>
-</ul>
-<h1 id="2-修改主机名字-CentOS7"><a href="#2-修改主机名字-CentOS7" class="headerlink" title="2.修改主机名字(CentOS7)"></a>2.修改主机名字(CentOS7)</h1><ul>
-<li>查看当前的 hostnmae  <ul>
-<li>[root@localhost ~]# hostname  </li>
-</ul>
-</li>
-<li>永久修改hostname(立即生效）  <ul>
-<li>[root@localhost ~]# hostnamectl set-hostname master  </li>
-</ul>
-</li>
-<li>检查修改  <ul>
-<li>[root@localhost ~]# hostname  </li>
-</ul>
-</li>
-</ul>
+<h1 id="1-切换root用户"><a href="#1-切换root用户" class="headerlink" title="1.切换root用户"></a>1.切换root用户</h1><p>CentOS7修改root用户密码  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# sudo passwd  </span><br><span class="line">Password：当前用户密码  </span><br><span class="line">New password：root密码  </span><br><span class="line">Retype new password: 重复root密码</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-修改主机名字-CentOS7"><a href="#2-修改主机名字-CentOS7" class="headerlink" title="2.修改主机名字(CentOS7)"></a>2.修改主机名字(CentOS7)</h1><p>查看当前的 hostnmae  </p>
+<blockquote>
+<p>[root@localhost ~]# <code>hostname</code>  </p>
+</blockquote>
+<p>永久修改hostname(立即生效）  </p>
+<blockquote>
+<p>[root@localhost ~]# <code>hostnamectl set-hostname master</code>  </p>
+</blockquote>
+<p>检查修改  </p>
+<blockquote>
+<p>[root@localhost ~]# <code>hostname</code> </p>
+</blockquote>
 <h1 id="3-修改网络配置"><a href="#3-修改网络配置" class="headerlink" title="3.修改网络配置"></a>3.修改网络配置</h1><blockquote>
-<p>vi /etc/sysconfig/network-scripts/ifcfg-eth0</p>
+<p>[root@master ~]# <code>vi /etc/sysconfig/network-scripts/ifcfg-eth0</code></p>
 </blockquote>
 <blockquote>
-<p><font color="red">删掉这两句<font><br>DEFROUTE=yes<br>PEERDNS=yes  </font></font></p>
+<p><font color="red">删掉这两句</font><br>DEFROUTE=yes<br>PEERDNS=yes  </p>
 </blockquote>
 <blockquote>
-<p>修改<br>BOOTPROTO=<font color="red">static<font></font></font></p>
+<p>修改<br>BOOTPROTO=<font color="red">static</font></p>
 </blockquote>
 <blockquote>
 <p>添加<br>PROXY_METHOD=none<br>BROWSER_ONLY=no<br>IPADDR=192.168.0.130 //本机IP地址<br>GATEWAY=192.168.0.1 //子网掩码<br>PREFIX=255.255.255.0 //网关<br>DNS1=114.114.114.114 //DNS</p>
 </blockquote>
 <h1 id="4-配置hosts"><a href="#4-配置hosts" class="headerlink" title="4.配置hosts"></a>4.配置hosts</h1><blockquote>
-<p>vi /etc/hosts 添加主机与服务器节点信息</p>
+<p>[root@master ~]# <code>vi /etc/hosts   #添加主机与服务器节点信息</code></p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">192.168.0.130 master  </span><br><span class="line">192.168.0.131 slave1  </span><br><span class="line">192.168.0.132 slave2  </span><br><span class="line">192.168.0.133 slave3</span><br></pre></td></tr></table></figure>
 
 <p>将配置好的hosts文件发送至其他服务器</p>
 <blockquote>
-<p>scp /etc/hosts root@slave1:/etc/<br>scp /etc/hosts root@slave2:/etc/<br>scp /etc/hosts root@slave3:/etc/</p>
+<p>[root@master ~]# <code>scp /etc/hosts root@slave1:/etc/</code><br>[root@master ~]# <code>scp /etc/hosts root@slave2:/etc/</code><br>[root@master ~]# <code>scp /etc/hosts root@slave3:/etc/</code></p>
 </blockquote>
-<h1 id="5-关闭防火墙"><a href="#5-关闭防火墙" class="headerlink" title="5.关闭防火墙"></a>5.关闭防火墙</h1><p>查看防火墙状态<br><code>firewall-cmd --state</code><br>关闭防火墙<br><code>systemctl stop firewalld.service</code><br>禁止防火墙开机启动<br><code>systemctl disable firewalld.service</code>  </p>
-<h1 id="6-时间同步"><a href="#6-时间同步" class="headerlink" title="6.时间同步"></a>6.时间同步</h1><p>下载ntp插件<br>[root@master ~]# <code>yum install ntp</code><br>同步中国上海时间，用阿里云服务器<br>[root@master ~]# <code>ntpdate -u ntp1.aliyun.com</code><br>查看是否配置成功<br>[root@master ~]# <code>date</code>  </p>
-<h1 id="7-配置ssh免密访问"><a href="#7-配置ssh免密访问" class="headerlink" title="7.配置ssh免密访问"></a>7.配置ssh免密访问</h1><p>生成公钥密钥对</p>
-<p>在每个节点上分别执行：<br>命令行输入：ssh-keygen -t rsa<br>一直按回车直到生成结束<br>执行结束之后每个节点上的/root/.ssh/目录下生成了两个文件 id_rsa 和 id_rsa.pub<br>其中前者为私钥，后者为公钥<br>在主节点上执行：<br>命令行输入：cp id_rsa.pub authorized_keys</p>
-<p>将子节点的公钥拷贝到主节点并添加进authorized_keys</p>
-<p>将两个子节点的公钥拷贝到主节点上<br>分别在两个子节点上执行：<br>scp /root/.ssh/id_rsa.pub root@Mage1:/root/.ssh/id_rsa_Mage2.pub<br>scp /root/.ssh/id_rsa.pub root@Mage1:/root/.ssh/id_rsa_Mage3.pub</p>
-<p>然后在主节点上，将拷贝过来的两个公钥合并到authorized_keys文件中去<br>主节点上执行：<br>cat id_rsa_Mage2.pub&gt;&gt; authorized_keys<br>cat id_rsa_Mage3.pub&gt;&gt; authorized_keys</p>
-<p>将主节点的authorized_keys文件分别替换子节点的authorized_keys文件<br>主节点上用scp命令将authorized_keys文件拷贝到子节点的相应位置<br>scp authorized_keys rootMage2:/root/.ssh/<br>scp authorized_keys rootMage3:/root/.ssh/</p>
-<p>最后测试是否配置成功</p>
-<p>在Mage1上分别执行<br>ssh Mage2<br>ssh Mage3<br>能正确跳转到两台子节点的操作界面即可，同样在每个子节点通过相同的方式登录主节点和其他子节点也能无密码正常登录就表示配置成功。</p>
-<h1 id="8-安装JDK"><a href="#8-安装JDK" class="headerlink" title="8.安装JDK"></a>8.安装JDK</h1><p>解压JDK ： tar -zxvf /usr/local/jdk-8u73-linux-x64.gz<br>配置环境变量, 编辑profile文件：<br>vi /etc/profile<br>在profile文件末尾添加以下代码:</p>
-<p>export JAVA_HOME=/usr/local/jdk1.8.0_191<br>export JRE_HOME=$JAVA_HOME/jre<br>export PATH=$JAVA_HOME/bin:$PATH<br>export CLASSPATH=$JAVA_HOME/lib:$JRE_HOME/lib</p>
-<p>保存后，使刚才编辑的文件生效：source /etc/profile</p>
-<p>测试是否安装成功：java -version</p>
-<h1 id="9-安装Hadoop"><a href="#9-安装Hadoop" class="headerlink" title="9.安装Hadoop"></a>9.安装Hadoop</h1><p>安装位置自定，例如安装在/usr/local目录下面<br>下载hadoop包：<br><a href="https://www.apache.org/dyn/closer.cgi/hadoop/common/hadoop-2.7.7/hadoop-2.7.7.tar.gz" target="_blank" rel="noopener">https://www.apache.org/dyn/closer.cgi/hadoop/common/hadoop-2.7.7/hadoop-2.7.7.tar.gz</a><br>放在/usr/local目录下，解压hadoop<br>tar -zxvf hadoop-2.7.7.tar.gz</p>
-<p>在usr下面生成hadoop-2.7.7目录<br>配置环境变量：<br>vi /etc/profile<br>在末尾添加：</p>
-<p>export HADOOP_HOME=/usr/local/hadoop-2.7.7<br>export PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin</p>
-<p>保存后使新编辑的profile生效：<br>source /etc/profile</p>
-<h1 id="10-配置Hadoop文件"><a href="#10-配置Hadoop文件" class="headerlink" title="10.配置Hadoop文件"></a>10.配置Hadoop文件</h1><h1 id="11-启动Hadoop并查看配置状态"><a href="#11-启动Hadoop并查看配置状态" class="headerlink" title="11.启动Hadoop并查看配置状态"></a>11.启动Hadoop并查看配置状态</h1><p>启动hadoop</p>
-<p>主节点上在hadoop目录下执行：<br>./sbin/start-all.sh</p>
-<p>主节点上jps进程如下：<br>NameNode<br>SecondaryNameNode<br>ResourceManager<br>每个子节点上的jps进程如下：<br>DataNode<br>NodeManager<br>如果这样表示hadoop集群配置成功</p>
+<h1 id="5-关闭防火墙"><a href="#5-关闭防火墙" class="headerlink" title="5.关闭防火墙"></a>5.关闭防火墙</h1><p>查看防火墙状态  </p>
+<blockquote>
+<p>[root@master ~]# <code>firewall-cmd --state</code>  </p>
+</blockquote>
+<p>关闭防火墙  </p>
+<blockquote>
+<p>[root@master ~]# <code>systemctl stop firewalld.service</code>  </p>
+</blockquote>
+<p>禁止防火墙开机启动  </p>
+<blockquote>
+<p>[root@master ~]# <code>systemctl disable firewalld.service</code>  </p>
+</blockquote>
+<h1 id="6-时间同步"><a href="#6-时间同步" class="headerlink" title="6.时间同步"></a>6.时间同步</h1><p>下载ntp插件  </p>
+<blockquote>
+<p>[root@master ~]# <code>yum install ntp</code>  </p>
+</blockquote>
+<p>同步中国上海时间，用阿里云服务器  </p>
+<blockquote>
+<p>[root@master ~]# <code>ntpdate -u ntp1.aliyun.com</code>  </p>
+</blockquote>
+<p>查看是否配置成功  </p>
+<blockquote>
+<p>[root@master ~]# <code>date</code>  </p>
+</blockquote>
+<h1 id="7-配置ssh免密访问"><a href="#7-配置ssh免密访问" class="headerlink" title="7.配置ssh免密访问"></a>7.配置ssh免密访问</h1><p>切换路径</p>
+<blockquote>
+<p>[root@master ~]# <code>cd ~/.ssh</code></p>
+</blockquote>
+<p>生成公钥密钥对</p>
+<blockquote>
+<p>[root@master .ssh]# <code>ssh-keygen -t rsa  #三次回车</code></p>
+</blockquote>
+<p>将密钥发送到slave</p>
+<blockquote>
+<p>[root@master .ssh]# <code>ssh-copy-id slave1</code></p>
+</blockquote>
+<p>添加本地认证公钥到认证文件中</p>
+<blockquote>
+<p>[root@master .ssh]# <code>cat id_rsa.pub &gt;&gt; authorized_keys</code></p>
+</blockquote>
+<p>验证是否成功配置</p>
+<blockquote>
+<p>[root@master ～]# <code>ssh slave1</code></p>
+</blockquote>
+<h1 id="8-安装JDK"><a href="#8-安装JDK" class="headerlink" title="8.安装JDK"></a>8.安装JDK</h1><h2 id="8-1-下载jdk"><a href="#8-1-下载jdk" class="headerlink" title="8.1 下载jdk"></a>8.1 下载jdk</h2><p><a href="https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank" rel="noopener">https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html</a><br>jdk-8u221-linux-x64.tar.gz</p>
+<h2 id="8-2-解压至本地"><a href="#8-2-解压至本地" class="headerlink" title="8.2 解压至本地"></a>8.2 解压至本地</h2><blockquote>
+<p>[root@master ～]# <code>cd /usr/local</code><br>[root@master local]# <code>tar -zxvf /usr/local/jdk-8u221-linux-x64.tar.gz</code></p>
+</blockquote>
+<h2 id="8-3-配置环境变量"><a href="#8-3-配置环境变量" class="headerlink" title="8.3 配置环境变量"></a>8.3 配置环境变量</h2><blockquote>
+<p>[root@master ～]# <code>vi /etc/profile</code></p>
+</blockquote>
+<p>添加以下配置信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/usr/local/jdk1.8.0_221</span><br><span class="line">export JRE_HOME=$JAVA_HOME/jre</span><br><span class="line">export PATH=$JAVA_HOME/bin:$PATH</span><br><span class="line">export CLASSPATH=$JAVA_HOME/lib:$JRE_HOME/lib</span><br></pre></td></tr></table></figure>
+
+<p>保存配置信息，并启用配置</p>
+<blockquote>
+<p>[root@master ～]# <code>source /etc/profile</code></p>
+</blockquote>
+<h2 id="8-4-查看是否配置成功"><a href="#8-4-查看是否配置成功" class="headerlink" title="8.4 查看是否配置成功"></a>8.4 查看是否配置成功</h2><blockquote>
+<p>[root@master ～]# <code>java -version</code></p>
+</blockquote>
+<h1 id="9-安装Hadoop"><a href="#9-安装Hadoop" class="headerlink" title="9.安装Hadoop"></a>9.安装Hadoop</h1><h2 id="9-1-下载hadoop"><a href="#9-1-下载hadoop" class="headerlink" title="9.1 下载hadoop"></a>9.1 下载hadoop</h2><p> <a href="http://archive.apache.org/dist/hadoop/common/hadoop-2.8.1/hadoop-2.8.1.tar.gz" target="_blank" rel="noopener">http://archive.apache.org/dist/hadoop/common/hadoop-2.8.1/hadoop-2.8.1.tar.gz</a></p>
+<h2 id="9-2-解压至本地"><a href="#9-2-解压至本地" class="headerlink" title="9.2 解压至本地"></a>9.2 解压至本地</h2><blockquote>
+<p>[root@master ～]# <code>cd /usr/local</code><br>[root@master local]# <code>tar -zxvf /usr/local/hadoop-2.8.1.tar.gz</code></p>
+</blockquote>
+<h2 id="9-3-配置环境变量"><a href="#9-3-配置环境变量" class="headerlink" title="9.3 配置环境变量"></a>9.3 配置环境变量</h2><blockquote>
+<p>[root@master ～]# <code>vi /etc/profile</code></p>
+</blockquote>
+<p>添加以下配置信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export HADOOP_HOME=/usr/local/hadoop-2.8.1</span><br><span class="line">export PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin</span><br></pre></td></tr></table></figure>
+
+<p>保存配置信息，并启用配置</p>
+<blockquote>
+<p>[root@master ～]# <code>source /etc/profile</code></p>
+</blockquote>
+<h1 id="10-配置Hadoop文件"><a href="#10-配置Hadoop文件" class="headerlink" title="10.配置Hadoop文件"></a>10.配置Hadoop文件</h1><blockquote>
+<p>[root@master ～]# <code>cd /usr/local/hadoop-2.8.1/etc/hadoop</code></p>
+</blockquote>
+<h2 id="10-1-hadoop-env-sh"><a href="#10-1-hadoop-env-sh" class="headerlink" title="10.1 hadoop-env.sh"></a>10.1 hadoop-env.sh</h2><p>添加<code>export JAVA_HOME=/usr/local/jdk1.8.0_221</code><br><img src="/2019/08/21/BigData/Hadoop/hadoop-env.png" alt="hadoop-env.sh"></p>
+<h2 id="10-2-yarn-env-sh"><a href="#10-2-yarn-env-sh" class="headerlink" title="10.2 yarn-env.sh"></a>10.2 yarn-env.sh</h2><p>添加<code>export JAVA_HOME=/usr/local/jdk1.8.0_221</code><br><img src="/2019/08/21/BigData/Hadoop/yarn-env.png" alt="yarn-env.sh"></p>
+<h2 id="10-3-core-site-xml"><a href="#10-3-core-site-xml" class="headerlink" title="10.3 core-site.xml"></a>10.3 core-site.xml</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;property&gt;</span><br><span class="line">      &lt;name&gt;fs.defaultFS&lt;/name&gt;</span><br><span class="line">      &lt;value&gt;hdfs://master:9000&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">      &lt;name&gt;io.file.buffer.size&lt;/name&gt;</span><br><span class="line">      &lt;value&gt;131072&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">      &lt;name&gt;hadoop.tmp.dir&lt;/name&gt;</span><br><span class="line">      &lt;value&gt;file:/usr/temp&lt;/value&gt;  #需要自己创建temp文件夹</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">      &lt;name&gt;hadoop.proxyuser.root.hosts&lt;/name&gt;</span><br><span class="line">      &lt;value&gt;*&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">      &lt;name&gt;hadoop.proxyuser.root.groups&lt;/name&gt;</span><br><span class="line">      &lt;value&gt;*&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="10-4-hdfs-site-xml"><a href="#10-4-hdfs-site-xml" class="headerlink" title="10.4 hdfs-site.xml"></a>10.4 hdfs-site.xml</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&lt;property&gt;</span><br><span class="line">      &lt;name&gt;dfs.namenode.secondary.http-address&lt;/name&gt;</span><br><span class="line">      &lt;value&gt;master:9001&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">      &lt;name&gt;dfs.namenode.name.dir&lt;/name&gt;</span><br><span class="line">      &lt;value&gt;file:/usr/dfs/name&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">      &lt;name&gt;dfs.datanode.data.dir&lt;/name&gt;</span><br><span class="line">      &lt;value&gt;file:/usr/dfs/data&lt;/value&gt;  #需要手动创建此路径</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">      &lt;name&gt;dfs.replication&lt;/name&gt;</span><br><span class="line">      &lt;value&gt;2&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">      &lt;name&gt;dfs.webhdfs.enabled&lt;/name&gt;</span><br><span class="line">      &lt;value&gt;true&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">      &lt;name&gt;dfs.permissions&lt;/name&gt;</span><br><span class="line">      &lt;value&gt;false&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">      &lt;name&gt;dfs.web.ugi&lt;/name&gt;</span><br><span class="line">      &lt;value&gt;supergroup&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="10-5-mapred-site-xml"><a href="#10-5-mapred-site-xml" class="headerlink" title="10.5 mapred-site.xml"></a>10.5 mapred-site.xml</h2><p>修改文件名</p>
+<blockquote>
+<p>[root@master hadoop]# <code>mv mapred-site.xml.template mapred-site.xml</code></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;property&gt;</span><br><span class="line">      &lt;name&gt;mapreduce.framework.name&lt;/name&gt;</span><br><span class="line">      &lt;value&gt;yarn&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">      &lt;name&gt;mapreduce.jobhistory.address&lt;/name&gt;</span><br><span class="line">      &lt;value&gt;master:10020&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">      &lt;name&gt;mapreduce.jobhistory.webapp.address&lt;/name&gt;</span><br><span class="line">      &lt;value&gt;master:19888&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="10-6-yarn-site-xml"><a href="#10-6-yarn-site-xml" class="headerlink" title="10.6 yarn-site.xml"></a>10.6 yarn-site.xml</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&lt;property&gt;</span><br><span class="line">      &lt;name&gt;yarn.nodemanager.aux-services&lt;/name&gt;</span><br><span class="line">      &lt;value&gt;mapreduce_shuffle&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">      &lt;name&gt;yarn.nodemanager.aux-services.mapreduce.shuffle.class&lt;/name&gt;</span><br><span class="line">      &lt;value&gt;org.apache.hadoop.mapred.ShuffleHandler&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">      &lt;name&gt;yarn.resourcemanager.address&lt;/name&gt;</span><br><span class="line">      &lt;value&gt;master:8032&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">      &lt;name&gt;yarn.resourcemanager.scheduler.address&lt;/name&gt;</span><br><span class="line">      &lt;value&gt;master:8030&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">      &lt;name&gt;yarn.resourcemanager.resource-tracker.address&lt;/name&gt;</span><br><span class="line">      &lt;value&gt;master:8031&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">      &lt;name&gt;yarn.resourcemanager.admin.address&lt;/name&gt;</span><br><span class="line">      &lt;value&gt;master:8033&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">      &lt;name&gt;yarn.resourcemanager.webapp.address&lt;/name&gt;</span><br><span class="line">      &lt;value&gt;master:8088&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="10-7-slaves"><a href="#10-7-slaves" class="headerlink" title="10.7 slaves"></a>10.7 slaves</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">slave1</span><br><span class="line">slave2</span><br><span class="line">slave3</span><br></pre></td></tr></table></figure>
+
+<h1 id="11-将配置好的jdk与hadoop拷贝到其他节点"><a href="#11-将配置好的jdk与hadoop拷贝到其他节点" class="headerlink" title="11.将配置好的jdk与hadoop拷贝到其他节点"></a>11.将配置好的jdk与hadoop拷贝到其他节点</h1><h2 id="11-1-拷贝jdk"><a href="#11-1-拷贝jdk" class="headerlink" title="11.1 拷贝jdk"></a>11.1 拷贝jdk</h2><blockquote>
+<p>[root@master ~]# <code>scp -r /usr/local/jdk1.8.0_221 root@slave1:/usr/local</code><br>[root@master ~]# <code>scp -r /usr/local/jdk1.8.0_221 root@slave2:/usr/local</code><br>[root@master ~]# <code>scp -r /usr/local/jdk1.8.0_221 root@slave3:/usr/local</code></p>
+</blockquote>
+<h2 id="11-2-拷贝hadoop"><a href="#11-2-拷贝hadoop" class="headerlink" title="11.2 拷贝hadoop"></a>11.2 拷贝hadoop</h2><blockquote>
+<p>[root@master ~]# <code>scp -r /usr/local/hadoop-2.8.1 root@slave1:/usr/local</code><br>[root@master ~]# <code>scp -r /usr/local/hadoop-2.8.1 root@slave2:/usr/local</code><br>[root@master ~]# <code>scp -r /usr/local/hadoop-2.8.1 root@slave3:/usr/local</code></p>
+</blockquote>
+<h2 id="11-3-拷贝环境配置文件"><a href="#11-3-拷贝环境配置文件" class="headerlink" title="11.3 拷贝环境配置文件"></a>11.3 拷贝环境配置文件</h2><blockquote>
+<p>[root@master ~]# <code>scp -r /etc/profile root@slave1:/etc</code><br>[root@master ~]# <code>scp -r /etc/profile root@slave2:/etc</code><br>[root@master ~]# <code>scp -r /etc/profile root@slave3:/etc</code></p>
+</blockquote>
+<p>使环境配置文件生效，每台都需要</p>
+<blockquote>
+<p>[root@master ～]# <code>source /etc/profile</code></p>
+</blockquote>
+<h1 id="12-启动Hadoop并查看配置状态"><a href="#12-启动Hadoop并查看配置状态" class="headerlink" title="12.启动Hadoop并查看配置状态"></a>12.启动Hadoop并查看配置状态</h1><p>启动hadoop</p>
+<blockquote>
+<p>[root@master ～]# <code>start-all.sh</code></p>
+</blockquote>
+<p>查看集群是否配置成功<br>主节点</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@master ～]# jps</span><br><span class="line">32032 Jps</span><br><span class="line">3764 SecondaryNameNode</span><br><span class="line">3949 ResourceManager</span><br><span class="line">3534 NameNode</span><br></pre></td></tr></table></figure>
+
+<p>子节点</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@slave1 ～]# jps</span><br><span class="line">1793 Jps</span><br><span class="line">3842 NodeManager</span><br><span class="line">3690 DataNode</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -613,7 +704,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Hadoop集群搭建"><span class="nav-text">Hadoop集群搭建</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-切换root用户"><span class="nav-text">1.切换root用户</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-修改主机名字-CentOS7"><span class="nav-text">2.修改主机名字(CentOS7)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-修改网络配置"><span class="nav-text">3.修改网络配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-配置hosts"><span class="nav-text">4.配置hosts</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-关闭防火墙"><span class="nav-text">5.关闭防火墙</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-时间同步"><span class="nav-text">6.时间同步</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-配置ssh免密访问"><span class="nav-text">7.配置ssh免密访问</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-安装JDK"><span class="nav-text">8.安装JDK</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#9-安装Hadoop"><span class="nav-text">9.安装Hadoop</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#10-配置Hadoop文件"><span class="nav-text">10.配置Hadoop文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#11-启动Hadoop并查看配置状态"><span class="nav-text">11.启动Hadoop并查看配置状态</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Hadoop集群搭建"><span class="nav-text">Hadoop集群搭建</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-切换root用户"><span class="nav-text">1.切换root用户</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-修改主机名字-CentOS7"><span class="nav-text">2.修改主机名字(CentOS7)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-修改网络配置"><span class="nav-text">3.修改网络配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-配置hosts"><span class="nav-text">4.配置hosts</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-关闭防火墙"><span class="nav-text">5.关闭防火墙</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-时间同步"><span class="nav-text">6.时间同步</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-配置ssh免密访问"><span class="nav-text">7.配置ssh免密访问</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-安装JDK"><span class="nav-text">8.安装JDK</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#8-1-下载jdk"><span class="nav-text">8.1 下载jdk</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-2-解压至本地"><span class="nav-text">8.2 解压至本地</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-3-配置环境变量"><span class="nav-text">8.3 配置环境变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-4-查看是否配置成功"><span class="nav-text">8.4 查看是否配置成功</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#9-安装Hadoop"><span class="nav-text">9.安装Hadoop</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#9-1-下载hadoop"><span class="nav-text">9.1 下载hadoop</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-2-解压至本地"><span class="nav-text">9.2 解压至本地</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-3-配置环境变量"><span class="nav-text">9.3 配置环境变量</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#10-配置Hadoop文件"><span class="nav-text">10.配置Hadoop文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#10-1-hadoop-env-sh"><span class="nav-text">10.1 hadoop-env.sh</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-2-yarn-env-sh"><span class="nav-text">10.2 yarn-env.sh</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-3-core-site-xml"><span class="nav-text">10.3 core-site.xml</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-4-hdfs-site-xml"><span class="nav-text">10.4 hdfs-site.xml</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-5-mapred-site-xml"><span class="nav-text">10.5 mapred-site.xml</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-6-yarn-site-xml"><span class="nav-text">10.6 yarn-site.xml</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-7-slaves"><span class="nav-text">10.7 slaves</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#11-将配置好的jdk与hadoop拷贝到其他节点"><span class="nav-text">11.将配置好的jdk与hadoop拷贝到其他节点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#11-1-拷贝jdk"><span class="nav-text">11.1 拷贝jdk</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-2-拷贝hadoop"><span class="nav-text">11.2 拷贝hadoop</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-3-拷贝环境配置文件"><span class="nav-text">11.3 拷贝环境配置文件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#12-启动Hadoop并查看配置状态"><span class="nav-text">12.启动Hadoop并查看配置状态</span></a></li></ol></div>
             
 
           </div>
