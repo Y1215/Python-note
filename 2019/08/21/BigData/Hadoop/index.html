@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Y">
 <meta property="og:description" content="Hadoop集群搭建">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-21T14:18:27.127Z">
+<meta property="og:updated_time" content="2019-08-22T02:09:10.420Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hadoop">
 <meta name="twitter:description" content="Hadoop集群搭建">
@@ -312,6 +312,17 @@
 
                 
                 
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/BigData/Hadoop/" itemprop="url" rel="index">
+                    <span itemprop="name">Hadoop</span>
+                  </a>
+                </span>
+
+                
+                
               
             </span>
           
@@ -391,7 +402,26 @@
 </blockquote>
 <h1 id="5-关闭防火墙"><a href="#5-关闭防火墙" class="headerlink" title="5.关闭防火墙"></a>5.关闭防火墙</h1><p>查看防火墙状态<br><code>firewall-cmd --state</code><br>关闭防火墙<br><code>systemctl stop firewalld.service</code><br>禁止防火墙开机启动<br><code>systemctl disable firewalld.service</code>  </p>
 <h1 id="6-时间同步"><a href="#6-时间同步" class="headerlink" title="6.时间同步"></a>6.时间同步</h1><p>下载ntp插件<br>[root@master ~]# <code>yum install ntp</code><br>同步中国上海时间，用阿里云服务器<br>[root@master ~]# <code>ntpdate -u ntp1.aliyun.com</code><br>查看是否配置成功<br>[root@master ~]# <code>date</code>  </p>
-<h1 id="7-配置ssh免密访问"><a href="#7-配置ssh免密访问" class="headerlink" title="7.配置ssh免密访问"></a>7.配置ssh免密访问</h1><h1 id="8-安装JDK"><a href="#8-安装JDK" class="headerlink" title="8.安装JDK"></a>8.安装JDK</h1><h1 id="9-安装Hadoop"><a href="#9-安装Hadoop" class="headerlink" title="9.安装Hadoop"></a>9.安装Hadoop</h1><h1 id="10-配置Hadoop文件"><a href="#10-配置Hadoop文件" class="headerlink" title="10.配置Hadoop文件"></a>10.配置Hadoop文件</h1><h1 id="11-启动Hadoop并查看配置状态"><a href="#11-启动Hadoop并查看配置状态" class="headerlink" title="11.启动Hadoop并查看配置状态"></a>11.启动Hadoop并查看配置状态</h1>
+<h1 id="7-配置ssh免密访问"><a href="#7-配置ssh免密访问" class="headerlink" title="7.配置ssh免密访问"></a>7.配置ssh免密访问</h1><p>生成公钥密钥对</p>
+<p>在每个节点上分别执行：<br>命令行输入：ssh-keygen -t rsa<br>一直按回车直到生成结束<br>执行结束之后每个节点上的/root/.ssh/目录下生成了两个文件 id_rsa 和 id_rsa.pub<br>其中前者为私钥，后者为公钥<br>在主节点上执行：<br>命令行输入：cp id_rsa.pub authorized_keys</p>
+<p>将子节点的公钥拷贝到主节点并添加进authorized_keys</p>
+<p>将两个子节点的公钥拷贝到主节点上<br>分别在两个子节点上执行：<br>scp /root/.ssh/id_rsa.pub root@Mage1:/root/.ssh/id_rsa_Mage2.pub<br>scp /root/.ssh/id_rsa.pub root@Mage1:/root/.ssh/id_rsa_Mage3.pub</p>
+<p>然后在主节点上，将拷贝过来的两个公钥合并到authorized_keys文件中去<br>主节点上执行：<br>cat id_rsa_Mage2.pub&gt;&gt; authorized_keys<br>cat id_rsa_Mage3.pub&gt;&gt; authorized_keys</p>
+<p>将主节点的authorized_keys文件分别替换子节点的authorized_keys文件<br>主节点上用scp命令将authorized_keys文件拷贝到子节点的相应位置<br>scp authorized_keys rootMage2:/root/.ssh/<br>scp authorized_keys rootMage3:/root/.ssh/</p>
+<p>最后测试是否配置成功</p>
+<p>在Mage1上分别执行<br>ssh Mage2<br>ssh Mage3<br>能正确跳转到两台子节点的操作界面即可，同样在每个子节点通过相同的方式登录主节点和其他子节点也能无密码正常登录就表示配置成功。</p>
+<h1 id="8-安装JDK"><a href="#8-安装JDK" class="headerlink" title="8.安装JDK"></a>8.安装JDK</h1><p>解压JDK ： tar -zxvf /usr/local/jdk-8u73-linux-x64.gz<br>配置环境变量, 编辑profile文件：<br>vi /etc/profile<br>在profile文件末尾添加以下代码:</p>
+<p>export JAVA_HOME=/usr/local/jdk1.8.0_191<br>export JRE_HOME=$JAVA_HOME/jre<br>export PATH=$JAVA_HOME/bin:$PATH<br>export CLASSPATH=$JAVA_HOME/lib:$JRE_HOME/lib</p>
+<p>保存后，使刚才编辑的文件生效：source /etc/profile</p>
+<p>测试是否安装成功：java -version</p>
+<h1 id="9-安装Hadoop"><a href="#9-安装Hadoop" class="headerlink" title="9.安装Hadoop"></a>9.安装Hadoop</h1><p>安装位置自定，例如安装在/usr/local目录下面<br>下载hadoop包：<br><a href="https://www.apache.org/dyn/closer.cgi/hadoop/common/hadoop-2.7.7/hadoop-2.7.7.tar.gz" target="_blank" rel="noopener">https://www.apache.org/dyn/closer.cgi/hadoop/common/hadoop-2.7.7/hadoop-2.7.7.tar.gz</a><br>放在/usr/local目录下，解压hadoop<br>tar -zxvf hadoop-2.7.7.tar.gz</p>
+<p>在usr下面生成hadoop-2.7.7目录<br>配置环境变量：<br>vi /etc/profile<br>在末尾添加：</p>
+<p>export HADOOP_HOME=/usr/local/hadoop-2.7.7<br>export PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin</p>
+<p>保存后使新编辑的profile生效：<br>source /etc/profile</p>
+<h1 id="10-配置Hadoop文件"><a href="#10-配置Hadoop文件" class="headerlink" title="10.配置Hadoop文件"></a>10.配置Hadoop文件</h1><h1 id="11-启动Hadoop并查看配置状态"><a href="#11-启动Hadoop并查看配置状态" class="headerlink" title="11.启动Hadoop并查看配置状态"></a>11.启动Hadoop并查看配置状态</h1><p>启动hadoop</p>
+<p>主节点上在hadoop目录下执行：<br>./sbin/start-all.sh</p>
+<p>主节点上jps进程如下：<br>NameNode<br>SecondaryNameNode<br>ResourceManager<br>每个子节点上的jps进程如下：<br>DataNode<br>NodeManager<br>如果这样表示hadoop集群配置成功</p>
+
       
     </div>
     
@@ -408,7 +438,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/BigData-Hadoop/" rel="tag"># BigData,Hadoop</a>
+            <a href="/tags/BigData/" rel="tag"># BigData</a>
+          
+            <a href="/tags/Hadoop/" rel="tag"># Hadoop</a>
           
         </div>
       
@@ -430,6 +462,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/22/BigData/Mapreduce/" rel="prev" title="Mapreduce">
+                Mapreduce <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -508,7 +544,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -519,7 +555,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -530,7 +566,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
