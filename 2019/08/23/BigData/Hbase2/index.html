@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="BigData,Hive,Hbase,">
+  <meta name="keywords" content="BigData,Hbase,Hive,">
 
 
 
@@ -80,14 +80,14 @@
 
 
 <meta name="description" content="Hbase与Hive的整合">
-<meta name="keywords" content="BigData,Hive,Hbase">
+<meta name="keywords" content="BigData,Hbase,Hive">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hbase2">
 <meta property="og:url" content="http://yoursite.com/2019/08/23/BigData/Hbase2/index.html">
 <meta property="og:site_name" content="Y">
 <meta property="og:description" content="Hbase与Hive的整合">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-23T06:14:08.756Z">
+<meta property="og:updated_time" content="2019-08-23T06:17:36.946Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hbase2">
 <meta name="twitter:description" content="Hbase与Hive的整合">
@@ -337,6 +337,37 @@
           
 
           
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  523 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  3 分钟
+                </span>
+              
+            </div>
+          
 
           
 
@@ -372,9 +403,9 @@
 
 <h1 id="4-在Hbase表中插入数据"><a href="#4-在Hbase表中插入数据" class="headerlink" title="4.在Hbase表中插入数据"></a>4.在Hbase表中插入数据</h1><h2 id="4-1-插入数据"><a href="#4-1-插入数据" class="headerlink" title="4.1 插入数据"></a>4.1 插入数据</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">hbase(main):001:0&gt; put &apos;hbase_to_hive_t_user&apos;, &apos;1&apos;, &apos;cf_user_info:name&apos;,&apos;Tom&apos;</span><br><span class="line">hbase(main):002:0&gt; put &apos;hbase_to_hive_t_user&apos;, &apos;1&apos;, &apos;cf_user_info:age&apos;,24</span><br><span class="line">hbase(main):003:0&gt; put &apos;hbase_to_hive_t_user&apos;, &apos;2&apos;, &apos;cf_user_info:name&apos;,&apos;John&apos;</span><br><span class="line">hbase(main):004:0&gt; put &apos;hbase_to_hive_t_user&apos;, &apos;2&apos;, &apos;cf_user_info:age&apos;,18</span><br><span class="line">hbase(main):005:0&gt; put &apos;hbase_to_hive_t_user&apos;, &apos;3&apos;, &apos;cf_user_info:name&apos;,&apos;Steven&apos;</span><br><span class="line">hbase(main):006:0&gt; put &apos;hbase_to_hive_t_user&apos;, &apos;3&apos;, &apos;cf_user_info:age&apos;,38</span><br></pre></td></tr></table></figure>
 
-<h2 id="4-2-查看数据"><a href="#4-2-查看数据" class="headerlink" title="4.2 查看数据"></a>4.2 查看数据</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">hbase(main):001:0&gt; scan &apos;hbase_to_hive_t_user&apos;</span><br><span class="line">ROW                   COLUMN+CELL                                               </span><br><span class="line"> 1                    column=cf_user_info:age, timestamp=1566463321590, value=24</span><br><span class="line"> 1                    column=cf_user_info:name, timestamp=1566463321538, value=Tom                 2                    column=cf_user_info:age, timestamp=1566463321696, value=18</span><br><span class="line"> 2                    column=cf_user_info:name, timestamp=1566463321616, value=John</span><br><span class="line"> 3                    column=cf_user_info:age, timestamp=1566463321784, value=38</span><br><span class="line"> 3                    column=cf_user_info:name, timestamp=1566463321736, value=Steven            </span><br><span class="line">3 row(s)</span><br><span class="line">Took 0.7046 seconds</span><br></pre></td></tr></table></figure>
+<h2 id="4-2-查看数据"><a href="#4-2-查看数据" class="headerlink" title="4.2 查看数据"></a>4.2 查看数据</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">hbase(main):001:0&gt; scan &apos;hbase_to_hive_t_user&apos;</span><br><span class="line">ROW                   COLUMN+CELL                                               </span><br><span class="line"> 1                    column=cf_user_info:age, timestamp=1566463321590, value=24</span><br><span class="line"> 1                    column=cf_user_info:name, timestamp=1566463321538, value=Tom</span><br><span class="line"> 2                    column=cf_user_info:age, timestamp=1566463321696, value=18</span><br><span class="line"> 2                    column=cf_user_info:name, timestamp=1566463321616, value=John</span><br><span class="line"> 3                    column=cf_user_info:age, timestamp=1566463321784, value=38</span><br><span class="line"> 3                    column=cf_user_info:name, timestamp=1566463321736, value=Steven            </span><br><span class="line">3 row(s)</span><br><span class="line">Took 0.7046 seconds</span><br></pre></td></tr></table></figure>
 
-<h1 id="5-在Hive中创建数据库表关联Hbase里面的表"><a href="#5-在Hive中创建数据库表关联Hbase里面的表" class="headerlink" title="5.在Hive中创建数据库表关联Hbase里面的表"></a>5.在Hive中创建数据库表关联Hbase里面的表</h1><h2 id="5-1-如果你想要Hive去访问Hbase中已经存在的表，你可以创建外部表-CREATE-EXTERNAL-TABLE"><a href="#5-1-如果你想要Hive去访问Hbase中已经存在的表，你可以创建外部表-CREATE-EXTERNAL-TABLE" class="headerlink" title="5.1 如果你想要Hive去访问Hbase中已经存在的表，你可以创建外部表(CREATE EXTERNAL TABLE)"></a>5.1 如果你想要Hive去访问Hbase中已经存在的表，你可以创建外部表(CREATE EXTERNAL TABLE)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CREATE EXTERNAL TABLE hive_access_hbase_table_t_user (key string, name string, age int)</span><br><span class="line">STORED BY &apos;org.apache.hadoop.hive.hbase.HBaseStorageHandler&apos;WITH SERDEPROPERTIES (&quot;hbase.columns.mapping&quot; = &quot;:key,cf_user_info:name,cf_user_info:age&quot;)TBLPROPERTIES (&quot;hbase.table.name&quot; = &quot;hbase_to_hive_t_user&quot;);</span><br></pre></td></tr></table></figure>
+<h1 id="5-在Hive中创建数据库表关联Hbase里面的表"><a href="#5-在Hive中创建数据库表关联Hbase里面的表" class="headerlink" title="5.在Hive中创建数据库表关联Hbase里面的表"></a>5.在Hive中创建数据库表关联Hbase里面的表</h1><h2 id="5-1-如果你想要Hive去访问Hbase中已经存在的表，你可以创建外部表-CREATE-EXTERNAL-TABLE"><a href="#5-1-如果你想要Hive去访问Hbase中已经存在的表，你可以创建外部表-CREATE-EXTERNAL-TABLE" class="headerlink" title="5.1 如果你想要Hive去访问Hbase中已经存在的表，你可以创建外部表(CREATE EXTERNAL TABLE)"></a>5.1 如果你想要Hive去访问Hbase中已经存在的表，你可以创建外部表(CREATE EXTERNAL TABLE)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE EXTERNAL TABLE hive_access_hbase_table_t_user (key string, name string, age int)STORED BY &apos;org.apache.hadoop.hive.hbase.HBaseStorageHandler&apos;WITH SERDEPROPERTIES (&quot;hbase.columns.mapping&quot; = &quot;:key,cf_user_info:name,cf_user_info:age&quot;)TBLPROPERTIES (&quot;hbase.table.name&quot; = &quot;hbase_to_hive_t_user&quot;);</span><br></pre></td></tr></table></figure>
 
 <h2 id="5-2-在Hive中查询Hbase表里的数据"><a href="#5-2-在Hive中查询Hbase表里的数据" class="headerlink" title="5.2 在Hive中查询Hbase表里的数据"></a>5.2 在Hive中查询Hbase表里的数据</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">hive&gt; select * from hive_access_hbase_table_t_user;</span><br><span class="line">OK</span><br><span class="line">1	Tom	24</span><br><span class="line">2	John	18</span><br><span class="line">3	Steven	38</span><br><span class="line">Time taken: 7.055 seconds, Fetched: 3 row(s)</span><br></pre></td></tr></table></figure>
 
@@ -397,9 +428,9 @@
           
             <a href="/tags/BigData/" rel="tag"># BigData</a>
           
-            <a href="/tags/Hive/" rel="tag"># Hive</a>
-          
             <a href="/tags/Hbase/" rel="tag"># Hbase</a>
+          
+            <a href="/tags/Hive/" rel="tag"># Hive</a>
           
         </div>
       

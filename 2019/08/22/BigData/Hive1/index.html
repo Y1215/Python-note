@@ -79,19 +79,19 @@
 
 
 
-<meta name="description" content="Hive的安装">
+<meta name="description" content="Hive的安装(包括mysql安装)">
 <meta name="keywords" content="BigData,Hive">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hive(一)">
 <meta property="og:url" content="http://yoursite.com/2019/08/22/BigData/Hive1/index.html">
 <meta property="og:site_name" content="Y">
-<meta property="og:description" content="Hive的安装">
+<meta property="og:description" content="Hive的安装(包括mysql安装)">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/08/22/BigData/Hive1/hive1.png">
-<meta property="og:updated_time" content="2019-08-23T01:17:16.260Z">
+<meta property="og:updated_time" content="2019-08-23T07:59:12.229Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hive(一)">
-<meta name="twitter:description" content="Hive的安装">
+<meta name="twitter:description" content="Hive的安装(包括mysql安装)">
 <meta name="twitter:image" content="http://yoursite.com/2019/08/22/BigData/Hive1/hive1.png">
 
 
@@ -339,6 +339,37 @@
           
 
           
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  979 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  5 分钟
+                </span>
+              
+            </div>
+          
 
           
 
@@ -355,7 +386,7 @@
       
 
       
-        <h1 id="Hive的安装"><a href="#Hive的安装" class="headerlink" title="Hive的安装"></a><center>Hive的安装</center></h1><a id="more"></a>
+        <h1 id="Hive的安装-包括mysql安装"><a href="#Hive的安装-包括mysql安装" class="headerlink" title="Hive的安装(包括mysql安装)"></a><center>Hive的安装(包括mysql安装)</center></h1><a id="more"></a>
 <h1 id="1-CentOS安装mysql"><a href="#1-CentOS安装mysql" class="headerlink" title="1.CentOS安装mysql"></a>1.CentOS安装mysql</h1><h2 id="1-1-卸载默认安装的mariadb"><a href="#1-1-卸载默认安装的mariadb" class="headerlink" title="1.1 卸载默认安装的mariadb"></a>1.1 卸载默认安装的mariadb</h2><blockquote>
 <p>[root@master ~]# <code>yum search mysql</code><br>[root@master ~]# <code>yum remove mariadb.x86_64</code></p>
 </blockquote>
@@ -384,7 +415,83 @@
 <h2 id="1-10-登陆mysql"><a href="#1-10-登陆mysql" class="headerlink" title="1.10 登陆mysql"></a>1.10 登陆mysql</h2><blockquote>
 <p>[root@master tmp]# <code>mysql -uroot -p</code></p>
 </blockquote>
-<h2 id="1-11-修改密码"><a href="#1-11-修改密码" class="headerlink" title="1.11 修改密码"></a>1.11 修改密码</h2><h1 id="注释-Hmaster进程启动后消失"><a href="#注释-Hmaster进程启动后消失" class="headerlink" title="注释 Hmaster进程启动后消失"></a>注释 Hmaster进程启动后消失</h1><p>启动hbase报java.lang.ClassNotFoundException: org.apache.htrace.SamplerBuilder<br>解决方法<br> cp $HBASE_HOME/lib/client-facing-thirdparty/htrace-core-3.1.0-incubating.jar $HBASE_HOME/lib/</p>
+<h2 id="1-11-调整密码验证规则"><a href="#1-11-调整密码验证规则" class="headerlink" title="1.11 调整密码验证规则"></a>1.11 调整密码验证规则</h2><blockquote>
+<p>mysql&gt; <code>set global validate_password.policy=0;</code><br>mysql&gt; <code>set global validate_password.length=1;</code></p>
+</blockquote>
+<h2 id="1-12-重新设置密码"><a href="#1-12-重新设置密码" class="headerlink" title="1.12 重新设置密码"></a>1.12 重新设置密码</h2><blockquote>
+<p>mysql&gt; <code>ALTER USER &#39;root&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;你的密码&#39;;</code></p>
+</blockquote>
+<h2 id="1-13-开通远程连接权限"><a href="#1-13-开通远程连接权限" class="headerlink" title="1.13 开通远程连接权限"></a>1.13 开通远程连接权限</h2><blockquote>
+<p>mysql&gt; <code>use mysql;</code><br>mysql&gt; <code>update user set host=&quot;%&quot; where Host=&#39;localhost&#39; and user = &quot;root&quot;;</code></p>
+</blockquote>
+<p>更新权限</p>
+<blockquote>
+<p>mysql&gt; <code>flush privileges;</code></p>
+</blockquote>
+<h1 id="2-Hive的安装"><a href="#2-Hive的安装" class="headerlink" title="2.Hive的安装"></a>2.Hive的安装</h1><h2 id="2-1-下载hive"><a href="#2-1-下载hive" class="headerlink" title="2.1 下载hive"></a>2.1 下载hive</h2><p><a href="http://us.mirrors.quenda.co/apache/hive/hive-2.3.5/" target="_blank" rel="noopener">http://us.mirrors.quenda.co/apache/hive/hive-2.3.5/</a></p>
+<h2 id="2-2-解压至本地"><a href="#2-2-解压至本地" class="headerlink" title="2.2 解压至本地"></a>2.2 解压至本地</h2><blockquote>
+<p>[root@master local]# <code>tar -xzvf apache-hive-2.1.0-bin.tar.gz /usr/local/</code></p>
+</blockquote>
+<p>改名</p>
+<blockquote>
+<p>[root@master local]# <code>mv apache-hive-2.1.0-bin hive-2.1.0</code></p>
+</blockquote>
+<h2 id="2-3-配置环境变量"><a href="#2-3-配置环境变量" class="headerlink" title="2.3 配置环境变量"></a>2.3 配置环境变量</h2><blockquote>
+<p>[root@master ~]# <code>vi /etc/profile</code></p>
+</blockquote>
+<p>在文件末尾添加</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export HIVE_HOME=/usr/local/hive-2.3.5</span><br><span class="line">export PATH=$HIVE_HOME/bin:$PATH</span><br></pre></td></tr></table></figure>
+
+<p>使配置生效</p>
+<blockquote>
+<p>[root@master ~]# <code>source /etc/profile</code></p>
+</blockquote>
+<h2 id="2-4-配置文件"><a href="#2-4-配置文件" class="headerlink" title="2.4 配置文件"></a>2.4 配置文件</h2><blockquote>
+<p>[root@master ~]# <code>cd /usr/local/hive-2.3.5/conf/</code></p>
+</blockquote>
+<p>将目录下所有带template后缀的文件移除后缀<br>其中hive-default.xml移除后缀后，需要修改名为hive-site.xml</p>
+<h3 id="2-4-1-hive-env-sh"><a href="#2-4-1-hive-env-sh" class="headerlink" title="2.4.1 hive-env.sh"></a>2.4.1 hive-env.sh</h3><p>添加以下配置信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/usr/local/jdk1.8.0_221</span><br><span class="line">export HADOOP_HOME=/usr/local/hadoop-2.8.1</span><br><span class="line">export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop</span><br><span class="line">export HIVE_HOME=/usr/local/hive-2.3.5</span><br><span class="line">export HIVE_CONF_DIR=$HIVE_HOME/conf</span><br><span class="line">export HIVE_AUX_JARS_PATH=$HIVE_HOME/lib</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-4-2-hive-log4j2-properties"><a href="#2-4-2-hive-log4j2-properties" class="headerlink" title="2.4.2 hive-log4j2.properties"></a>2.4.2 hive-log4j2.properties</h3><p>配置以下信息，若logs不存在，请创建</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">property.hive.log.dir=/usr/local/hive-2.3.5/logs</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-4-3-创建目录"><a href="#2-4-3-创建目录" class="headerlink" title="2.4.3 创建目录"></a>2.4.3 创建目录</h3><blockquote>
+<p>[root@master ~]# <code>cd /usr/local/hive-2.3.5</code><br>[root@master hive-2.3.5]# <code>mkdir tmp</code><br>[root@master hive-2.3.5]# <code>mkdir tmp/hduser</code></p>
+</blockquote>
+<h3 id="2-4-4-使用mysql存放hive元数据"><a href="#2-4-4-使用mysql存放hive元数据" class="headerlink" title="2.4.4 使用mysql存放hive元数据"></a>2.4.4 使用mysql存放hive元数据</h3><p>默认情况下, Hive的元数据保存在了内嵌的derby数据库里, 但一般情况下生产环境使用MySQL来存放Hive元数据。<br>将mysql-connector-java-5.1.48.jar 放入 $HIVE_HOME/lib下（mysql jdbc驱动程序）<br>下载链接<a href="https://cdn.mysql.com//Downloads/Connector-J/mysql-connector-java-5.1.48.tar.gz" target="_blank" rel="noopener">https://cdn.mysql.com//Downloads/Connector-J/mysql-connector-java-5.1.48.tar.gz</a></p>
+<h3 id="2-4-5-hive-site-xml"><a href="#2-4-5-hive-site-xml" class="headerlink" title="2.4.5 hive-site.xml"></a>2.4.5 hive-site.xml</h3><p>仅配置以下内容，其余都删除，其中zookeeper内容可以后续添加</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;property&gt;</span><br><span class="line">        &lt;name&gt;javax.jdo.option.ConnectionURL&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;jdbc:mysql://master:3306/hive?createDatabaseIfNotExist=true&amp;amp;useUnicode=true&amp;amp;characterEncoding=UTF-8&amp;amp;useSSL=false&amp;amp;allowPublicKeyRetrieval=true&lt;/value&gt;</span><br><span class="line">        &lt;description&gt;JDBC connect string for a JDBC metastore&lt;/description&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">        &lt;name&gt;javax.jdo.option.ConnectionDriverName&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;com.mysql.jdbc.Driver&lt;/value&gt;</span><br><span class="line">        &lt;description&gt;Driver class name for a JDBC metastore&lt;/description&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">        &lt;name&gt;javax.jdo.option.ConnectionUserName&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;root&lt;/value&gt;</span><br><span class="line">        &lt;description&gt;username to use against metastore database&lt;/description&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">        &lt;name&gt;javax.jdo.option.ConnectionPassword&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;12345678&lt;/value&gt;</span><br><span class="line">        &lt;description&gt;password to use against metastore database&lt;/description&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- Hbase zookeeper quorum   --&gt;</span><br><span class="line">&lt;property&gt;    </span><br><span class="line">        &lt;name&gt;hbase.zookeeper.quorum&lt;/name&gt;    </span><br><span class="line">        &lt;value&gt;master,slave1,slave2,slave3&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-4-6-为Hive创建HDFS目录"><a href="#2-4-6-为Hive创建HDFS目录" class="headerlink" title="2.4.6 为Hive创建HDFS目录"></a>2.4.6 为Hive创建HDFS目录</h3><ul>
+<li>启动hadoop<blockquote>
+<p>[root@master ~]# <code>start-all.sh</code></p>
+</blockquote>
+</li>
+<li>在HDFS上创建目录<blockquote>
+<p>[root@master ~]# <code>hdfs dfs -mkdir /tmp</code><br>[root@master ~]# <code>hdfs dfs -mkdir /tmp/hive</code><br>[root@master ~]# <code>hdfs dfs -mkdir /user/hduser/warehouse</code></p>
+</blockquote>
+</li>
+<li>追加权限<blockquote>
+<p>[root@master ~]# <code>hdfs dfs -chmod -R 777 /tmp</code><br>[root@master ~]# <code>hdfs dfs -chmod -R 777 /user/hduser/warehouse</code></p>
+</blockquote>
+</li>
+</ul>
+<h3 id="2-4-7-运行Hive"><a href="#2-4-7-运行Hive" class="headerlink" title="2.4.7 运行Hive"></a>2.4.7 运行Hive</h3><ul>
+<li>启动mysql服务器：<blockquote>
+<p>[root@master ～]# <code>service mysqld start</code></p>
+</blockquote>
+</li>
+<li>执行初始化操作<blockquote>
+<p>[root@master ～]# <code>schematool -initSchema -dbType mysql</code><br>执行成功后，可以查看MySQL中元数据库hive是否已经创建成功。</p>
+</blockquote>
+</li>
+<li>启动Hive<blockquote>
+<p>[root@master ～]# <code>hive</code><br>hive&gt; <code>show tables;</code> //查看当前库中的表<br>hive&gt; <code>quit;</code>  //退出hive</p>
+</blockquote>
+</li>
+</ul>
+<h1 id="注释-Hmaster进程启动后消失"><a href="#注释-Hmaster进程启动后消失" class="headerlink" title="注释 Hmaster进程启动后消失"></a>注释 Hmaster进程启动后消失</h1><p>启动hbase报java.lang.ClassNotFoundException: org.apache.htrace.SamplerBuilder<br>解决方法<br> cp $HBASE_HOME/lib/client-facing-thirdparty/htrace-core-3.1.0-incubating.jar $HBASE_HOME/lib/</p>
 
       
     </div>
@@ -577,7 +684,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Hive的安装"><span class="nav-text">Hive的安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-CentOS安装mysql"><span class="nav-text">1.CentOS安装mysql</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-卸载默认安装的mariadb"><span class="nav-text">1.1 卸载默认安装的mariadb</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-在官网查找mysql版本的下载地址"><span class="nav-text">1.2 在官网查找mysql版本的下载地址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-安装"><span class="nav-text">1.3 安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-安装yum源"><span class="nav-text">1.4 安装yum源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-查看是否安装成功"><span class="nav-text">1.5 查看是否安装成功</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-6-使用yum安装"><span class="nav-text">1.6 使用yum安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-7-查看是否安装成功"><span class="nav-text">1.7 查看是否安装成功</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-8-启动mysql"><span class="nav-text">1.8 启动mysql</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-9-查找默认登录密码"><span class="nav-text">1.9 查找默认登录密码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-10-登陆mysql"><span class="nav-text">1.10 登陆mysql</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-11-修改密码"><span class="nav-text">1.11 修改密码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#注释-Hmaster进程启动后消失"><span class="nav-text">注释 Hmaster进程启动后消失</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Hive的安装-包括mysql安装"><span class="nav-text">Hive的安装(包括mysql安装)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-CentOS安装mysql"><span class="nav-text">1.CentOS安装mysql</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-卸载默认安装的mariadb"><span class="nav-text">1.1 卸载默认安装的mariadb</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-在官网查找mysql版本的下载地址"><span class="nav-text">1.2 在官网查找mysql版本的下载地址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-安装"><span class="nav-text">1.3 安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-安装yum源"><span class="nav-text">1.4 安装yum源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-查看是否安装成功"><span class="nav-text">1.5 查看是否安装成功</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-6-使用yum安装"><span class="nav-text">1.6 使用yum安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-7-查看是否安装成功"><span class="nav-text">1.7 查看是否安装成功</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-8-启动mysql"><span class="nav-text">1.8 启动mysql</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-9-查找默认登录密码"><span class="nav-text">1.9 查找默认登录密码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-10-登陆mysql"><span class="nav-text">1.10 登陆mysql</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-11-调整密码验证规则"><span class="nav-text">1.11 调整密码验证规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-12-重新设置密码"><span class="nav-text">1.12 重新设置密码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-13-开通远程连接权限"><span class="nav-text">1.13 开通远程连接权限</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-Hive的安装"><span class="nav-text">2.Hive的安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-下载hive"><span class="nav-text">2.1 下载hive</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-解压至本地"><span class="nav-text">2.2 解压至本地</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-配置环境变量"><span class="nav-text">2.3 配置环境变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-配置文件"><span class="nav-text">2.4 配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-1-hive-env-sh"><span class="nav-text">2.4.1 hive-env.sh</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-2-hive-log4j2-properties"><span class="nav-text">2.4.2 hive-log4j2.properties</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-3-创建目录"><span class="nav-text">2.4.3 创建目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-4-使用mysql存放hive元数据"><span class="nav-text">2.4.4 使用mysql存放hive元数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-5-hive-site-xml"><span class="nav-text">2.4.5 hive-site.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-6-为Hive创建HDFS目录"><span class="nav-text">2.4.6 为Hive创建HDFS目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-7-运行Hive"><span class="nav-text">2.4.7 运行Hive</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#注释-Hmaster进程启动后消失"><span class="nav-text">注释 Hmaster进程启动后消失</span></a></li></ol></div>
             
 
           </div>
