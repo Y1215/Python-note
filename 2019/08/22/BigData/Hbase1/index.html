@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="BigData,Zookeeper,">
+  <meta name="keywords" content="BigData,Hbase,">
 
 
 
@@ -79,21 +79,18 @@
 
 
 
-<meta name="description" content="Zookeeper的安装">
-<meta name="keywords" content="BigData,Zookeeper">
+<meta name="description" content="Hbase的安装">
+<meta name="keywords" content="BigData,Hbase">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Zookeeper(一)">
-<meta property="og:url" content="http://yoursite.com/2019/08/22/BigData/Zookeeper1/index.html">
+<meta property="og:title" content="Hbase(一)">
+<meta property="og:url" content="http://yoursite.com/2019/08/22/BigData/Hbase1/index.html">
 <meta property="og:site_name" content="Y">
-<meta property="og:description" content="Zookeeper的安装">
+<meta property="og:description" content="Hbase的安装">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2019/08/22/BigData/Zookeeper1/zk1.png">
-<meta property="og:image" content="http://yoursite.com/2019/08/22/BigData/Zookeeper1/zk2.png">
-<meta property="og:updated_time" content="2019-08-23T06:56:19.613Z">
+<meta property="og:updated_time" content="2019-08-23T08:23:34.229Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Zookeeper(一)">
-<meta name="twitter:description" content="Zookeeper的安装">
-<meta name="twitter:image" content="http://yoursite.com/2019/08/22/BigData/Zookeeper1/zk1.png">
+<meta name="twitter:title" content="Hbase(一)">
+<meta name="twitter:description" content="Hbase的安装">
 
 
 
@@ -123,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/08/22/BigData/Zookeeper1/">
+  <link rel="canonical" href="http://yoursite.com/2019/08/22/BigData/Hbase1/">
 
 
 
 
 
-  <title>Zookeeper(一) | Y</title>
+  <title>Hbase(一) | Y</title>
   
 
 
@@ -256,7 +253,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/22/BigData/Zookeeper1/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/22/BigData/Hbase1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="YL">
@@ -273,7 +270,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Zookeeper(一)</h1>
+          <h1 class="post-title" itemprop="name headline">Hbase(一)</h1>
         
 
         <div class="post-meta">
@@ -285,7 +282,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-22T10:18:29+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-22T10:19:10+08:00">
                 2019-08-22
               </time>
             
@@ -319,8 +316,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/BigData/Zookeeper/" itemprop="url" rel="index">
-                    <span itemprop="name">Zookeeper</span>
+                  <a href="/categories/BigData/Hbase/" itemprop="url" rel="index">
+                    <span itemprop="name">Hbase</span>
                   </a>
                 </span>
 
@@ -350,7 +347,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  507 字
+                  377 字
                 </span>
               
 
@@ -366,7 +363,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3 分钟
+                  2 分钟
                 </span>
               
             </div>
@@ -387,63 +384,48 @@
       
 
       
-        <h1 id="Zookeeper的安装"><a href="#Zookeeper的安装" class="headerlink" title="Zookeeper的安装"></a><center>Zookeeper的安装</center></h1><a id="more"></a>
+        <h1 id="Hbase的安装"><a href="#Hbase的安装" class="headerlink" title="Hbase的安装"></a><center>Hbase的安装</center></h1><a id="more"></a>
 
-<h1 id="1-下载Zookeeper安装包"><a href="#1-下载Zookeeper安装包" class="headerlink" title="1.下载Zookeeper安装包"></a>1.下载Zookeeper安装包</h1><p><a href="http://archive.apache.org/dist/zookeeper/zookeeper-3.4.2/" target="_blank" rel="noopener">http://archive.apache.org/dist/zookeeper/zookeeper-3.4.2/</a></p>
-<h1 id="2-解压至本地"><a href="#2-解压至本地" class="headerlink" title="2.解压至本地"></a>2.解压至本地</h1><blockquote>
-<p>[root@master ~]# <code>tar -xzvf zookeeper-3.4.2.tar.gz -C /usr/local/</code></p>
+<h1 id="1-下载Hbase"><a href="#1-下载Hbase" class="headerlink" title="1.下载Hbase"></a>1.下载Hbase</h1><p><a href="http://mirror.bit.edu.cn/apache/hbase/2.1.5/" target="_blank" rel="noopener">http://mirror.bit.edu.cn/apache/hbase/2.1.5/</a></p>
+<h1 id="2-解压至本地路径"><a href="#2-解压至本地路径" class="headerlink" title="2.解压至本地路径"></a>2.解压至本地路径</h1><blockquote>
+<p>[root@master ~]# <code>tar -xzvf hbase-2.1.5-bin.tar.gz -C /usr/local/</code></p>
 </blockquote>
-<h1 id="3-配置环境变量"><a href="#3-配置环境变量" class="headerlink" title="3.配置环境变量"></a>3.配置环境变量</h1><blockquote>
-<p>[root@master ~]# <code>vi /etc/profile</code><br>在文件末尾添加</p>
+<h1 id="3-修改Hbase配置文件"><a href="#3-修改Hbase配置文件" class="headerlink" title="3.修改Hbase配置文件"></a>3.修改Hbase配置文件</h1><p>切换路径</p>
+<blockquote>
+<p>[root@master ~]# <code>cd /usr/local/hbase-2.1.5/conf</code></p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export ZOOKEEPER=/usr/local/zookeeper-3.4.2</span><br><span class="line">export PATH=$PATH:$ZOOKEEPER/bin</span><br></pre></td></tr></table></figure>
+<h2 id="3-1-修改hbase-env-sh脚本，添加以下信息"><a href="#3-1-修改hbase-env-sh脚本，添加以下信息" class="headerlink" title="3.1 修改hbase-env.sh脚本，添加以下信息"></a>3.1 修改hbase-env.sh脚本，添加以下信息</h2><blockquote>
+<p>[root@master conf]# <code>vi hbase-env.sh</code>  </p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 指定HBase是否使用HBase本身自带的Zookeeper</span><br><span class="line">export HBASE_MANAGES_ZK=false</span><br><span class="line"># 指定Jdk目录</span><br><span class="line">export JAVA_HOME=/root/jdk1.8.0_221</span><br><span class="line"># 指定Hadoop配置文件目录</span><br><span class="line">export HBASE_CLASSPATH=/usr/local/hadoop-2.8.1/etc/hadoop</span><br></pre></td></tr></table></figure>
 
-<p>使配置生效</p>
-<blockquote>
-<p>[root@master ~]# <code>source /etc/profile</code></p>
+<h2 id="3-2-修改hbase-site-xml"><a href="#3-2-修改hbase-site-xml" class="headerlink" title="3.2 修改hbase-site.xml"></a>3.2 修改hbase-site.xml</h2><blockquote>
+<p>[root@master conf]# <code>vi hbase-site.xml</code>  </p>
 </blockquote>
-<h1 id="4-配置Zookeeper文件"><a href="#4-配置Zookeeper文件" class="headerlink" title="4.配置Zookeeper文件"></a>4.配置Zookeeper文件</h1><p>切换路径</p>
-<blockquote>
-<p>[root@master ~]# <code>cd /usr/local/zookeeper-3.4.2/conf/</code></p>
-</blockquote>
-<h2 id="4-1-复制zoo-sample-cfg模板配置文件为正式的配置文件zoo-cfg"><a href="#4-1-复制zoo-sample-cfg模板配置文件为正式的配置文件zoo-cfg" class="headerlink" title="4.1 复制zoo_sample.cfg模板配置文件为正式的配置文件zoo.cfg"></a>4.1 复制zoo_sample.cfg模板配置文件为正式的配置文件zoo.cfg</h2><blockquote>
-<p>[root@master ~]# <code>cp zoo_sample.cfg zoo.cfg</code><br><img src="/2019/08/22/BigData/Zookeeper1/zk1.png" alt="zoo.cfg"></p>
-</blockquote>
-<h2 id="4-2-创建myid文件"><a href="#4-2-创建myid文件" class="headerlink" title="4.2 创建myid文件"></a>4.2 创建myid文件</h2><p>切换路径</p>
-<blockquote>
-<p>[root@master conf]# <code>cd /usr/local/zookeeper-3.4.2/data</code><br>创建myid文件,并根据zoo.cfg中的配置内容，将本机与server.x对应的x写入myid文件中<br>[root@master data]# <code>vi myid</code><br>例如本机为master，zoo.cfg配置文件中为server.1，则在myid文件中写入1</p>
-</blockquote>
-<h2 id="4-3-复制Zookeeper"><a href="#4-3-复制Zookeeper" class="headerlink" title="4.3 复制Zookeeper"></a>4.3 复制Zookeeper</h2><blockquote>
-<p>[root@master data]# <code>scp -r /usr/local/zookeeper-3.4.2/ slave1:/usr/local/</code><br>[root@master data]# <code>scp -r /usr/local/zookeeper-3.4.2/ slave2:/usr/local/</code><br>[root@master data]# <code>scp -r /usr/local/zookeeper-3.4.2/ slave3:/usr/local/</code></p>
-</blockquote>
-<h2 id="4-4-修改slave1，2，3的myid"><a href="#4-4-修改slave1，2，3的myid" class="headerlink" title="4.4 修改slave1，2，3的myid"></a>4.4 修改slave1，2，3的myid</h2><p>将对应的id写入myid中</p>
-<h2 id="4-5-复制环境变量配置文件"><a href="#4-5-复制环境变量配置文件" class="headerlink" title="4.5 复制环境变量配置文件"></a>4.5 复制环境变量配置文件</h2><blockquote>
-<p>[root@master data]# <code>scp /etc/profile slave1:/etc</code><br>[root@master data]# <code>scp /etc/profile slave2:/etc</code><br>[root@master data]# <code>scp /etc/profile slave3:/etc</code></p>
-</blockquote>
-<p>切换至slave，使配置文件生效</p>
-<blockquote>
-<p>[root@slave1 ~]# <code>source /etc/profile</code></p>
-</blockquote>
-<h1 id="5-启动Zookeeper集群"><a href="#5-启动Zookeeper集群" class="headerlink" title="5.启动Zookeeper集群"></a>5.启动Zookeeper集群</h1><p>需要每台机器都执行</p>
-<blockquote>
-<p>[root@master ～]# <code>zkServer.sh start</code></p>
-</blockquote>
-<p>查看Zookeeper集群状态</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@master ～]# zkServer.sh status</span><br><span class="line">JMX enabled by default</span><br><span class="line">Using config: /usr/local/zookeeper-3.4.2/bin/../conf/zoo.cfg</span><br><span class="line">Mode: follower</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;property&gt;</span><br><span class="line">        &lt;name&gt;hbase.rootdir&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;hdfs://master:9000/hbase&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">        &lt;name&gt;hbase.cluster.distributed&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;true&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;property&gt;</span><br><span class="line">        &lt;name&gt;hbase.zookeeper.quorum&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;master,slave1,slave2,slave3&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br></pre></td></tr></table></figure>
 
-<h1 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@master data]# zkServer.sh status</span><br><span class="line">JMX enabled by default</span><br><span class="line">Using config: /usr/local/zookeeper-3.4.2/bin/../conf/zoo.cfg</span><br><span class="line">Error contacting service. It is probably not running.</span><br></pre></td></tr></table></figure>
-
-<p>解决方法：<br>分别在每个节点上安装nc工具</p>
-<blockquote>
-<p>[root@master data]# <code>yum install nc -y</code></p>
+<h2 id="3-3-修改regionservers"><a href="#3-3-修改regionservers" class="headerlink" title="3.3 修改regionservers"></a>3.3 修改regionservers</h2><blockquote>
+<p>[root@master conf]# <code>vi regionservers</code>   </p>
 </blockquote>
-<p>切换路径</p>
-<blockquote>
-<p>[root@master data]# <code>cd /usr/local/zookeeper-3.4.2/bin</code></p>
-</blockquote>
-<p>修改zkServer.sh脚本文件内容<br><img src="/2019/08/22/BigData/Zookeeper1/zk2.png" alt="zkServer.sh"></p>
-<h2 id="注释：关于zookeeker-out日志文件"><a href="#注释：关于zookeeker-out日志文件" class="headerlink" title="注释：关于zookeeker.out日志文件"></a>注释：关于zookeeker.out日志文件</h2><p>当前终端处于哪个目录，执行完zkServer.sh start命令， zookeeper.out就会写在哪个目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">master</span><br><span class="line">slave1</span><br><span class="line">slave2</span><br><span class="line">slave3</span><br></pre></td></tr></table></figure>
 
+<h1 id="4-启动Hbase集群"><a href="#4-启动Hbase集群" class="headerlink" title="4.启动Hbase集群"></a>4.启动Hbase集群</h1><p>检查zookeeper状态 </p>
+<blockquote>
+<p>[root@master ～]# <code>zkServer.sh status</code></p>
+</blockquote>
+<p>检查namenode,datanode状态  </p>
+<blockquote>
+<p>[root@master ～]# <code>jps</code><br><a href="http://master:50070/" target="_blank" rel="noopener">http://master:50070/</a>   登陆网页查看</p>
+</blockquote>
+<p>检查完后，启动Hbase</p>
+<blockquote>
+<p>[root@master ～]# start-hbase.sh</p>
+</blockquote>
+<p>查看是否成功启动</p>
+<blockquote>
+<p><a href="http://master:16010/" target="_blank" rel="noopener">http://master:16010/</a>   登陆网页查看Hbase状态<br>[root@master ～]# <code>hbase shell</code>  启动hbase命令行客户端</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">hbase(main):001:0&gt; list  // 查看表</span><br><span class="line">TABLE                                                                           </span><br><span class="line">0 row(s)</span><br><span class="line">Took 0.5952 seconds                                                             </span><br><span class="line">=&gt; []</span><br><span class="line">hbase(main):002:0&gt; status  // 查看集群状态</span><br><span class="line">1 active master, 0 backup masters, 4 servers, 0 dead, 0.5000 average load</span><br><span class="line">Took 0.1489 seconds                                                             </span><br><span class="line">hbase(main):003:0&gt; version  // 查看集群版本</span><br><span class="line">2.1.5, r0ba7cc01a13dbb7fec8e6c5d599fc8b4936bae61, Tue May 28 22:25:02 UTC 2019</span><br><span class="line">Took 0.0003 seconds</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -462,7 +444,7 @@
           
             <a href="/tags/BigData/" rel="tag"># BigData</a>
           
-            <a href="/tags/Zookeeper/" rel="tag"># Zookeeper</a>
+            <a href="/tags/Hbase/" rel="tag"># Hbase</a>
           
         </div>
       
@@ -475,8 +457,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/08/22/BigData/Hive1/" rel="next" title="Hive(一)">
-                <i class="fa fa-chevron-left"></i> Hive(一)
+              <a href="/2019/08/22/BigData/Zookeeper1/" rel="next" title="Zookeeper(一)">
+                <i class="fa fa-chevron-left"></i> Zookeeper(一)
               </a>
             
           </div>
@@ -485,8 +467,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/08/22/BigData/Hbase1/" rel="prev" title="Hbase(一)">
-                Hbase(一) <i class="fa fa-chevron-right"></i>
+              <a href="/2019/08/23/BigData/Hbase2/" rel="prev" title="Hbase(二)">
+                Hbase(二) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -635,7 +617,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Zookeeper的安装"><span class="nav-text">Zookeeper的安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-下载Zookeeper安装包"><span class="nav-text">1.下载Zookeeper安装包</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-解压至本地"><span class="nav-text">2.解压至本地</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-配置环境变量"><span class="nav-text">3.配置环境变量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-配置Zookeeper文件"><span class="nav-text">4.配置Zookeeper文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-复制zoo-sample-cfg模板配置文件为正式的配置文件zoo-cfg"><span class="nav-text">4.1 复制zoo_sample.cfg模板配置文件为正式的配置文件zoo.cfg</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-创建myid文件"><span class="nav-text">4.2 创建myid文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-复制Zookeeper"><span class="nav-text">4.3 复制Zookeeper</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-4-修改slave1，2，3的myid"><span class="nav-text">4.4 修改slave1，2，3的myid</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-5-复制环境变量配置文件"><span class="nav-text">4.5 复制环境变量配置文件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-启动Zookeeper集群"><span class="nav-text">5.启动Zookeeper集群</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#遇到的问题"><span class="nav-text">遇到的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#注释：关于zookeeker-out日志文件"><span class="nav-text">注释：关于zookeeker.out日志文件</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Hbase的安装"><span class="nav-text">Hbase的安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-下载Hbase"><span class="nav-text">1.下载Hbase</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-解压至本地路径"><span class="nav-text">2.解压至本地路径</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-修改Hbase配置文件"><span class="nav-text">3.修改Hbase配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-修改hbase-env-sh脚本，添加以下信息"><span class="nav-text">3.1 修改hbase-env.sh脚本，添加以下信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-修改hbase-site-xml"><span class="nav-text">3.2 修改hbase-site.xml</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-修改regionservers"><span class="nav-text">3.3 修改regionservers</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-启动Hbase集群"><span class="nav-text">4.启动Hbase集群</span></a></li></ol></div>
             
 
           </div>
