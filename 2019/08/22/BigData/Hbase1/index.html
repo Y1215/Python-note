@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Y">
 <meta property="og:description" content="Hbase的安装">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-23T08:23:34.229Z">
+<meta property="og:updated_time" content="2019-08-26T03:17:12.650Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hbase(一)">
 <meta name="twitter:description" content="Hbase的安装">
@@ -347,7 +347,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  377 字
+                  416 字
                 </span>
               
 
@@ -426,6 +426,9 @@
 <p><a href="http://master:16010/" target="_blank" rel="noopener">http://master:16010/</a>   登陆网页查看Hbase状态<br>[root@master ～]# <code>hbase shell</code>  启动hbase命令行客户端</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">hbase(main):001:0&gt; list  // 查看表</span><br><span class="line">TABLE                                                                           </span><br><span class="line">0 row(s)</span><br><span class="line">Took 0.5952 seconds                                                             </span><br><span class="line">=&gt; []</span><br><span class="line">hbase(main):002:0&gt; status  // 查看集群状态</span><br><span class="line">1 active master, 0 backup masters, 4 servers, 0 dead, 0.5000 average load</span><br><span class="line">Took 0.1489 seconds                                                             </span><br><span class="line">hbase(main):003:0&gt; version  // 查看集群版本</span><br><span class="line">2.1.5, r0ba7cc01a13dbb7fec8e6c5d599fc8b4936bae61, Tue May 28 22:25:02 UTC 2019</span><br><span class="line">Took 0.0003 seconds</span><br></pre></td></tr></table></figure>
+
+<h1 id="注释-Hmaster进程启动后消失"><a href="#注释-Hmaster进程启动后消失" class="headerlink" title="注释 Hmaster进程启动后消失"></a>注释 Hmaster进程启动后消失</h1><p>启动hbase报<code>java.lang.ClassNotFoundException: org.apache.htrace.SamplerBuilder</code><br>解决方法<br><code>cp $HBASE_HOME/lib/client-facing-thirdparty/htrace-core-3.1.0-incubating.jar $HBASE_HOME/lib/</code></p>
+
       
     </div>
     
@@ -617,7 +620,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Hbase的安装"><span class="nav-text">Hbase的安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-下载Hbase"><span class="nav-text">1.下载Hbase</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-解压至本地路径"><span class="nav-text">2.解压至本地路径</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-修改Hbase配置文件"><span class="nav-text">3.修改Hbase配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-修改hbase-env-sh脚本，添加以下信息"><span class="nav-text">3.1 修改hbase-env.sh脚本，添加以下信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-修改hbase-site-xml"><span class="nav-text">3.2 修改hbase-site.xml</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-修改regionservers"><span class="nav-text">3.3 修改regionservers</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-启动Hbase集群"><span class="nav-text">4.启动Hbase集群</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Hbase的安装"><span class="nav-text">Hbase的安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-下载Hbase"><span class="nav-text">1.下载Hbase</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-解压至本地路径"><span class="nav-text">2.解压至本地路径</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-修改Hbase配置文件"><span class="nav-text">3.修改Hbase配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-修改hbase-env-sh脚本，添加以下信息"><span class="nav-text">3.1 修改hbase-env.sh脚本，添加以下信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-修改hbase-site-xml"><span class="nav-text">3.2 修改hbase-site.xml</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-修改regionservers"><span class="nav-text">3.3 修改regionservers</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-启动Hbase集群"><span class="nav-text">4.启动Hbase集群</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#注释-Hmaster进程启动后消失"><span class="nav-text">注释 Hmaster进程启动后消失</span></a></li></ol></div>
             
 
           </div>
