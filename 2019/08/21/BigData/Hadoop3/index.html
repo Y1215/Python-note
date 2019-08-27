@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="python,">
+  <meta name="keywords" content="BigData,Hadoop,">
 
 
 
@@ -79,18 +79,20 @@
 
 
 
-<meta name="description" content="字符串、容器型态、比较运算、语法与函数">
-<meta name="keywords" content="python">
+<meta name="description" content="Hadoop概念">
+<meta name="keywords" content="BigData,Hadoop">
 <meta property="og:type" content="article">
-<meta property="og:title" content="python-note1">
-<meta property="og:url" content="http://yoursite.com/2019/05/22/Python/python-note1/index.html">
+<meta property="og:title" content="Hadoop(三)">
+<meta property="og:url" content="http://yoursite.com/2019/08/21/BigData/Hadoop3/index.html">
 <meta property="og:site_name" content="Y">
-<meta property="og:description" content="字符串、容器型态、比较运算、语法与函数">
+<meta property="og:description" content="Hadoop概念">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-21T12:59:05.169Z">
+<meta property="og:image" content="http://yoursite.com/2019/08/21/BigData/Hadoop3/hd3_1.png">
+<meta property="og:updated_time" content="2019-08-26T09:07:59.433Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="python-note1">
-<meta name="twitter:description" content="字符串、容器型态、比较运算、语法与函数">
+<meta name="twitter:title" content="Hadoop(三)">
+<meta name="twitter:description" content="Hadoop概念">
+<meta name="twitter:image" content="http://yoursite.com/2019/08/21/BigData/Hadoop3/hd3_1.png">
 
 
 
@@ -120,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/05/22/Python/python-note1/">
+  <link rel="canonical" href="http://yoursite.com/2019/08/21/BigData/Hadoop3/">
 
 
 
 
 
-  <title>python-note1 | Y</title>
+  <title>Hadoop(三) | Y</title>
   
 
 
@@ -253,7 +255,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/22/Python/python-note1/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/21/BigData/Hadoop3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="YL">
@@ -270,7 +272,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">python-note1</h1>
+          <h1 class="post-title" itemprop="name headline">Hadoop(三)</h1>
         
 
         <div class="post-meta">
@@ -282,8 +284,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-22T09:12:32+08:00">
-                2019-05-22
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-21T20:57:52+08:00">
+                2019-08-21
               </time>
             
 
@@ -292,6 +294,39 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/BigData/" itemprop="url" rel="index">
+                    <span itemprop="name">BigData</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/BigData/Hadoop/" itemprop="url" rel="index">
+                    <span itemprop="name">Hadoop</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -314,7 +349,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  771 字
+                  598 字
                 </span>
               
 
@@ -330,7 +365,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3 分钟
+                  2 分钟
                 </span>
               
             </div>
@@ -351,66 +386,33 @@
       
 
       
-        <center>字符串、容器型态、比较运算、语法与函数</center>
-<a id="more"></a>
-# Python 第一周
+        <h1 id="Hadoop概念"><a href="#Hadoop概念" class="headerlink" title="Hadoop概念"></a><center>Hadoop概念</center></h1><a id="more"></a>
 
-<h2 id="1-字符串型态"><a href="#1-字符串型态" class="headerlink" title="1.字符串型态"></a>1.字符串型态</h2><p>end参数，在指定的字串显示之后， end 参数指定的字符串就会输出。如果不想换行，将 end 指定为空字串‘ ’。</p>
-<p>当指定多个字符串给print( )的话，预设的分隔符号是一个空白字符，想要用其他字符的话，可以指定 sep 参数。</p>
-<p>占位符号的部分要使用{ }</p>
-<ul>
-<li><p>如果{ }没有数字或名称， format( ) 会依序指定对应的数值。</p>
+<h1 id="1-大数据的4V特征"><a href="#1-大数据的4V特征" class="headerlink" title="1.大数据的4V特征"></a>1.大数据的4V特征</h1><p>Volume(数据量大)<br>Velocity（高速）<br>Variety（数据种类繁多）<br>Value（有价值；价值密度低）  </p>
+<h1 id="2-大数据技术"><a href="#2-大数据技术" class="headerlink" title="2.大数据技术"></a>2.大数据技术</h1><p><img src="/2019/08/21/BigData/Hadoop3/hd3_1.png" alt="大数据"></p>
+<h1 id="3-Hadoop"><a href="#3-Hadoop" class="headerlink" title="3.Hadoop"></a>3.Hadoop</h1><p>Hadoop是一个由apache所开发的一个<font color="red">分布式系统基础架构</font>。</p>
+<h2 id="3-1-Hadoop的优势"><a href="#3-1-Hadoop的优势" class="headerlink" title="3.1 Hadoop的优势"></a>3.1 Hadoop的优势</h2><p>1、高可靠（多个副本）<br>2、高扩展（集群上的节点可以有很多）<br>3、高效性（并行去工作）<br>4、高容错性（自动将失败的任务重新分配）</p>
+<h2 id="3-2-Hadoop的组成"><a href="#3-2-Hadoop的组成" class="headerlink" title="3.2 Hadoop的组成"></a>3.2 Hadoop的组成</h2><p>1、common（辅助工具）<br>2、hdfs（数据存储）<br>3、yarn（资源调度）<br>4、mapreduce（计算）  </p>
+<h1 id="4-HDFS——Hadoop分布式文件系统"><a href="#4-HDFS——Hadoop分布式文件系统" class="headerlink" title="4.HDFS——Hadoop分布式文件系统"></a>4.HDFS——Hadoop分布式文件系统</h1><h2 id="4-1-block的一些操作"><a href="#4-1-block的一些操作" class="headerlink" title="4.1 block的一些操作"></a>4.1 block的一些操作</h2><p>设置文件副本数<br><code>hadoop fs -setrep -R 4 /path</code><br>查看文件的块信息<br><code>hdfs fsck /02-041-0029.mp4 -files -blocks -locations</code></p>
+<h2 id="4-2-HDFS架构体系——主从架构"><a href="#4-2-HDFS架构体系——主从架构" class="headerlink" title="4.2 HDFS架构体系——主从架构"></a>4.2 HDFS架构体系——主从架构</h2><h3 id="4-2-1-namenode"><a href="#4-2-1-namenode" class="headerlink" title="4.2.1 namenode"></a>4.2.1 namenode</h3><p>存储文件的元数据：比如文件名、文件的目录结构、文件属性（生成时间、副本数量、文件的权限），以及每个文件的快列表和块所在的datanode等</p>
+<h3 id="4-2-2-datanode"><a href="#4-2-2-datanode" class="headerlink" title="4.2.2 datanode"></a>4.2.2 datanode</h3><p>存储block，以及block元数据包括数据块的长度、块数据的校验和、时间戳</p>
+<h3 id="4-2-3-secondarynamenode"><a href="#4-2-3-secondarynamenode" class="headerlink" title="4.2.3 secondarynamenode"></a>4.2.3 secondarynamenode</h3><p>相当于namenode的快照</p>
+<h2 id="4-3-HDFS机制"><a href="#4-3-HDFS机制" class="headerlink" title="4.3 HDFS机制"></a>4.3 HDFS机制</h2><h3 id="4-3-1-心跳机制"><a href="#4-3-1-心跳机制" class="headerlink" title="4.3.1 心跳机制"></a>4.3.1 心跳机制</h3><ul>
+<li>工作原理 <ul>
+<li>master启动的时候，会开一个ipc server；</li>
+<li>slave启动，连接master，每隔3秒钟向master发送一个“心跳”，携带状态信息；</li>
+<li>master通过这个心跳的返回值，向slave节点传达指令。</li>
+</ul>
 </li>
-<li><p>如果{ }有数字，如{0}，则会使用format( ) 中的第一个自变量。</p>
-</li>
-<li><p>如果{ }指定了名称，则会使用format{ }中的具名参数。</p>
+<li>作用<ul>
+<li>Namenode全权管理数据块的复制，它周期性地从集群中的每个Datanode接收心跳信号和块状态报告 (Blockreport)。接收到心跳信号意味着该Datanode节点工作正常。块状态报告包含了一个该 Datanode上所 有数据块的列表</li>
+<li>DataNode启动后向NameNode注册，通过后，周期性（1小时）的向 NameNode上报所有的块的列表；每3秒向NamNode发一次心跳，返回NameNode给该DataNode的命令；如复制块数据到另一台机器，或删 除某个数据块。如果NameNode超过10分钟没有收 到某个DataNode 的心跳，则认为该节点不可用。</li>
+<li>hadoop集群刚开始启动时，会进入安全模式（99.9%），就用到了心跳机制</li>
+</ul>
 </li>
 </ul>
-<h2 id="2-容器型态"><a href="#2-容器型态" class="headerlink" title="2.容器型态"></a>2.容器型态</h2><h3 id="list"><a href="#list" class="headerlink" title="list"></a>list</h3><p>列表型态为list，特性为有序、有索引值，内容与长度可以变动，要建立串列，可以使用[ ]建立， 串行中的每个元素都用逗号「,」区隔。</p>
-<p>append( ) – 在列表末尾添加新的对象</p>
-<p>extend( ) – 添加到现有列表后面</p>
-<p>insert(index, obj) – 在index索引位置插入obj对象</p>
-<p>pop( ) – 移除列表中的一个元素（默认最后一个元素），并且返回该元素的值</p>
-<p>remove( ) – 移除列表中某个值的第一个匹配项</p>
-<p>reverse( ) – 反向列表中元素</p>
-<p>count(obj) – 统计obj对象在列表出现的次数</p>
-<p>sort(cmp=None, key=None, reverse=False) – 对原列表进行排序</p>
-<ul>
-<li>cmp – 可选参数, 如果指定了该参数会使用该参数的方法进行排序。</li>
-<li>key – 主要是用来进行比较的元素，只有一个参数，具体的函数的参数就是取自于可迭代对象中，指定可迭代对象中的一个元素来进行排序。</li>
-<li>reverse – 排序规则，reverse = True 降序， reverse = False 升序（默认）。</li>
-</ul>
-<h3 id="set"><a href="#set" class="headerlink" title="set"></a>set</h3><p>集合内容无序、但元素不重复，可以使用{ }建立集合，元素间以,分隔</p>
-<p>建立空集合，不能使用{ }，因为这会建立空的dict ，而不是set ；这时候就要用到set( )函式，想新增元素可以用add( )</p>
-<h3 id="dict"><a href="#dict" class="headerlink" title="dict"></a>dict</h3><p>字典是用来储存两两对应的Key-Value ，是为 dict 型态，可以用{ }加上相对的key-value pair建立字典物件</p>
-<ul>
-<li>建立字典时，每个Key 会用来取得对应的 Value 。 </li>
-<li>dict 的 Key 不重复，想指定Key 取得 Value 时用[ ]。 </li>
-<li>可以随时再加入一对Key，如果想要删除某对KeyValue ，可以使用del( ) 这个函式。</li>
-</ul>
-<h3 id="Tuple"><a href="#Tuple" class="headerlink" title="Tuple"></a>Tuple</h3><p>Tuple为有序的结构。可以使用[ ]指定索引值取得元素。</p>
-<p>一旦建立Tuple，就不能更动其内容，为immutable物件。</p>
-<p>建立 Tuple ：只要在某个值的后面加上「,」 即 可，或使用()来建立Tuple物件</p>
-<h2 id="3-比较运算"><a href="#3-比较运算" class="headerlink" title="3.比较运算"></a>3.比较运算</h2><p>== 、 != 与 is 、 is not 的差异 </p>
-<ul>
-<li>== 、 != 是用来比较物件实际的值，状态等是否相等。</li>
-<li>is 、 is not 用来比较两物件的参考是否相同。</li>
-</ul>
-<h2 id="4-语法与函数"><a href="#4-语法与函数" class="headerlink" title="4.语法与函数"></a>4.语法与函数</h2><h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><ul>
-<li>if判断式 </li>
-<li>while循环 </li>
-<li>for… in….迭代</li>
-</ul>
-<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><ul>
-<li><p>def定义函式 </p>
-<blockquote>
-<p>global 内部函数修改外部函数的变量</p>
-</blockquote>
-</li>
-<li><p>一级函式的应用 </p>
-</li>
-<li><p>lambda表达式</p>
-</li>
+<h3 id="4-3-2-负载均衡"><a href="#4-3-2-负载均衡" class="headerlink" title="4.3.2 负载均衡"></a>4.3.2 负载均衡</h3><ul>
+<li>磁盘利用率差值大于5%，就触发<br><code>$HADOOP_HOME/sbin/start-balancer.sh -t 5%</code></li>
 </ul>
 
       
@@ -429,7 +431,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/python/" rel="tag"># python</a>
+            <a href="/tags/BigData/" rel="tag"># BigData</a>
+          
+            <a href="/tags/Hadoop/" rel="tag"># Hadoop</a>
           
         </div>
       
@@ -442,14 +446,18 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2019/08/21/BigData/Hadoop2/" rel="next" title="Hadoop(二)">
+                <i class="fa fa-chevron-left"></i> Hadoop(二)
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/05/22/Python/python-note2/" rel="prev" title="python-note2">
-                python-note2 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/08/22/BigData/Mapreduce/" rel="prev" title="Mapreduce">
+                Mapreduce <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -598,7 +606,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-字符串型态"><span class="nav-text">1.字符串型态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-容器型态"><span class="nav-text">2.容器型态</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#list"><span class="nav-text">list</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#set"><span class="nav-text">set</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dict"><span class="nav-text">dict</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tuple"><span class="nav-text">Tuple</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-比较运算"><span class="nav-text">3.比较运算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-语法与函数"><span class="nav-text">4.语法与函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#语法"><span class="nav-text">语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数"><span class="nav-text">函数</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Hadoop概念"><span class="nav-text">Hadoop概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-大数据的4V特征"><span class="nav-text">1.大数据的4V特征</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-大数据技术"><span class="nav-text">2.大数据技术</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-Hadoop"><span class="nav-text">3.Hadoop</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-Hadoop的优势"><span class="nav-text">3.1 Hadoop的优势</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-Hadoop的组成"><span class="nav-text">3.2 Hadoop的组成</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-HDFS——Hadoop分布式文件系统"><span class="nav-text">4.HDFS——Hadoop分布式文件系统</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-block的一些操作"><span class="nav-text">4.1 block的一些操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-HDFS架构体系——主从架构"><span class="nav-text">4.2 HDFS架构体系——主从架构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-1-namenode"><span class="nav-text">4.2.1 namenode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-2-datanode"><span class="nav-text">4.2.2 datanode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-3-secondarynamenode"><span class="nav-text">4.2.3 secondarynamenode</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-HDFS机制"><span class="nav-text">4.3 HDFS机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-1-心跳机制"><span class="nav-text">4.3.1 心跳机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-2-负载均衡"><span class="nav-text">4.3.2 负载均衡</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
