@@ -88,7 +88,7 @@
 <meta property="og:description" content="Hive的安装(包括mysql安装)">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/08/22/BigData/Hive1/hive1.png">
-<meta property="og:updated_time" content="2019-08-26T03:16:46.781Z">
+<meta property="og:updated_time" content="2019-08-27T02:24:50.362Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hive(一)">
 <meta name="twitter:description" content="Hive的安装(包括mysql安装)">
@@ -349,7 +349,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  940 字
+                  944 字
                 </span>
               
 
@@ -459,7 +459,7 @@
 <h3 id="2-4-3-创建目录"><a href="#2-4-3-创建目录" class="headerlink" title="2.4.3 创建目录"></a>2.4.3 创建目录</h3><blockquote>
 <p>[root@master ~]# <code>cd /usr/local/hive-2.3.5</code><br>[root@master hive-2.3.5]# <code>mkdir tmp</code><br>[root@master hive-2.3.5]# <code>mkdir tmp/hduser</code></p>
 </blockquote>
-<h3 id="2-4-4-使用mysql存放hive元数据"><a href="#2-4-4-使用mysql存放hive元数据" class="headerlink" title="2.4.4 使用mysql存放hive元数据"></a>2.4.4 使用mysql存放hive元数据</h3><p>默认情况下, Hive的元数据保存在了内嵌的derby数据库里, 但一般情况下生产环境使用MySQL来存放Hive元数据。<br>将mysql-connector-java-5.1.48.jar 放入 $HIVE_HOME/lib下（mysql jdbc驱动程序）<br>下载链接<a href="https://cdn.mysql.com//Downloads/Connector-J/mysql-connector-java-5.1.48.tar.gz" target="_blank" rel="noopener">https://cdn.mysql.com//Downloads/Connector-J/mysql-connector-java-5.1.48.tar.gz</a></p>
+<h3 id="2-4-4-使用mysql存放hive元数据"><a href="#2-4-4-使用mysql存放hive元数据" class="headerlink" title="2.4.4 使用mysql存放hive元数据"></a>2.4.4 使用mysql存放hive元数据</h3><p>默认情况下, Hive的元数据保存在了内嵌的derby数据库里, 但一般情况下生产环境使用MySQL来存放Hive元数据。<br>将mysql-connector-java-8.0.13.jar 放入 $HIVE_HOME/lib下（mysql jdbc驱动程序）<br>下载链接<a href="https://repo1.maven.org/maven2/mysql/mysql-connector-java/8.0.13/mysql-connector-java-8.0.13.jar" target="_blank" rel="noopener">https://repo1.maven.org/maven2/mysql/mysql-connector-java/8.0.13/mysql-connector-java-8.0.13.jar</a></p>
 <h3 id="2-4-5-hive-site-xml"><a href="#2-4-5-hive-site-xml" class="headerlink" title="2.4.5 hive-site.xml"></a>2.4.5 hive-site.xml</h3><p>仅配置以下内容，其余都删除，其中zookeeper内容可以后续添加</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;property&gt;</span><br><span class="line">        &lt;name&gt;javax.jdo.option.ConnectionURL&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;jdbc:mysql://master:3306/hive?createDatabaseIfNotExist=true&amp;amp;useUnicode=true&amp;amp;characterEncoding=UTF-8&amp;amp;useSSL=false&amp;amp;allowPublicKeyRetrieval=true&lt;/value&gt;</span><br><span class="line">        &lt;description&gt;JDBC connect string for a JDBC metastore&lt;/description&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">        &lt;name&gt;javax.jdo.option.ConnectionDriverName&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;com.mysql.jdbc.Driver&lt;/value&gt;</span><br><span class="line">        &lt;description&gt;Driver class name for a JDBC metastore&lt;/description&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">        &lt;name&gt;javax.jdo.option.ConnectionUserName&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;root&lt;/value&gt;</span><br><span class="line">        &lt;description&gt;username to use against metastore database&lt;/description&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">        &lt;name&gt;javax.jdo.option.ConnectionPassword&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;12345678&lt;/value&gt;</span><br><span class="line">        &lt;description&gt;password to use against metastore database&lt;/description&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- Hbase zookeeper quorum   --&gt;</span><br><span class="line">&lt;property&gt;    </span><br><span class="line">        &lt;name&gt;hbase.zookeeper.quorum&lt;/name&gt;    </span><br><span class="line">        &lt;value&gt;master,slave1,slave2,slave3&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br></pre></td></tr></table></figure>
 
@@ -614,7 +614,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -625,7 +625,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -636,7 +636,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
