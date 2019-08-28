@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Y">
 <meta property="og:description" content="Flume的开发案例">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-28T07:37:27.177Z">
+<meta property="og:updated_time" content="2019-08-28T07:40:27.374Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Flume(二)">
 <meta name="twitter:description" content="Flume的开发案例">
@@ -347,7 +347,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,159 字
+                  1,160 字
                 </span>
               
 
@@ -422,7 +422,7 @@
 <p>[root@master ~]# <code>cd /usr/local/flume-1.7.0/upload/</code><br>[root@master upload]# <code>touch test.txt</code><br>[root@master upload]# <code>touch test.tmp</code><br>[root@master upload]# <code>touch test.log</code></p>
 </blockquote>
 <h2 id="2-4-在hdfs上查看"><a href="#2-4-在hdfs上查看" class="headerlink" title="2.4 在hdfs上查看"></a>2.4 在hdfs上查看</h2><p><a href="http://master:50070/" target="_blank" rel="noopener">http://master:50070/</a></p>
-<h2 id="2-5查看upload文件夹"><a href="#2-5查看upload文件夹" class="headerlink" title="2.5查看upload文件夹"></a>2.5查看upload文件夹</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@master upload]# ll</span><br><span class="line">total 16</span><br><span class="line">-rw-r--r--. 1 root root   12 Aug 28 15:07 test.log.COMPLETED</span><br><span class="line">-rw-r--r--. 1 root root  155 Aug 28 15:07 test.tmp</span><br><span class="line">-rw-r--r--. 1 root root 5556 Aug 28 15:07 test.txt.COMPLETED</span><br></pre></td></tr></table></figure>
+<h2 id="2-5-查看upload文件夹"><a href="#2-5-查看upload文件夹" class="headerlink" title="2.5 查看upload文件夹"></a>2.5 查看upload文件夹</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@master upload]# ll</span><br><span class="line">total 16</span><br><span class="line">-rw-r--r--. 1 root root   12 Aug 28 15:07 test.log.COMPLETED</span><br><span class="line">-rw-r--r--. 1 root root  155 Aug 28 15:07 test.tmp</span><br><span class="line">-rw-r--r--. 1 root root 5556 Aug 28 15:07 test.txt.COMPLETED</span><br></pre></td></tr></table></figure>
 
 
       
@@ -612,7 +612,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Flume的开发案例"><span class="nav-text">Flume的开发案例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-实时读取本地文件到HDFS"><span class="nav-text">1.实时读取本地文件到HDFS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-导入Hadoop相关jar包"><span class="nav-text">1.1 导入Hadoop相关jar包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-创建flume-file-hdfs-conf"><span class="nav-text">1.2 创建flume-file-hdfs.conf</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-执行监控配置"><span class="nav-text">1.3 执行监控配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-开启hive并操作hive"><span class="nav-text">1.4 开启hive并操作hive</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-在hdfs上查看"><span class="nav-text">1.5 在hdfs上查看</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-实时读取目录文件到HDFS"><span class="nav-text">2.实时读取目录文件到HDFS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-创建flume-dir-hdfs-conf"><span class="nav-text">2.1 创建flume-dir-hdfs.conf</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-执行监控配置"><span class="nav-text">2.2 执行监控配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-向upload文件夹中添加文件"><span class="nav-text">2.3 向upload文件夹中添加文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-在hdfs上查看"><span class="nav-text">2.4 在hdfs上查看</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5查看upload文件夹"><span class="nav-text">2.5查看upload文件夹</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Flume的开发案例"><span class="nav-text">Flume的开发案例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-实时读取本地文件到HDFS"><span class="nav-text">1.实时读取本地文件到HDFS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-导入Hadoop相关jar包"><span class="nav-text">1.1 导入Hadoop相关jar包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-创建flume-file-hdfs-conf"><span class="nav-text">1.2 创建flume-file-hdfs.conf</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-执行监控配置"><span class="nav-text">1.3 执行监控配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-开启hive并操作hive"><span class="nav-text">1.4 开启hive并操作hive</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-在hdfs上查看"><span class="nav-text">1.5 在hdfs上查看</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-实时读取目录文件到HDFS"><span class="nav-text">2.实时读取目录文件到HDFS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-创建flume-dir-hdfs-conf"><span class="nav-text">2.1 创建flume-dir-hdfs.conf</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-执行监控配置"><span class="nav-text">2.2 执行监控配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-向upload文件夹中添加文件"><span class="nav-text">2.3 向upload文件夹中添加文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-在hdfs上查看"><span class="nav-text">2.4 在hdfs上查看</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5-查看upload文件夹"><span class="nav-text">2.5 查看upload文件夹</span></a></li></ol></li></ol></div>
             
 
           </div>

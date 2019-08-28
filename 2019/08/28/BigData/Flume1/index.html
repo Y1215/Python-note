@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Y">
 <meta property="og:description" content="Flume安装">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-28T06:12:14.786Z">
+<meta property="og:updated_time" content="2019-08-28T07:40:55.499Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Flume(一)">
 <meta name="twitter:description" content="Flume安装">
@@ -391,7 +391,9 @@
 <p>[root@master ~]# <code>cd /usr/local/flume-1.7.0/conf/</code><br>[root@master conf]# <code>cp flume-env.sh.template flume-env.sh</code><br>[root@master conf]# <code>vi flume-env.sh</code></p>
 </blockquote>
 <p>添加信息<br><code>export JAVA_HOME=/usr/local/jdk1.8.0_221</code></p>
-<h1 id="3-监控端口数据"><a href="#3-监控端口数据" class="headerlink" title="3.监控端口数据"></a>3.监控端口数据</h1><h2 id="3-1-开发配置文件"><a href="#3-1-开发配置文件" class="headerlink" title="3.1 开发配置文件"></a>3.1 开发配置文件</h2><p>[root@master conf]# vi /usr/local/flume-1.7.0/conf/netcat-logger.conf</p>
+<h1 id="3-监控端口数据"><a href="#3-监控端口数据" class="headerlink" title="3.监控端口数据"></a>3.监控端口数据</h1><h2 id="3-1-开发配置文件"><a href="#3-1-开发配置文件" class="headerlink" title="3.1 开发配置文件"></a>3.1 开发配置文件</h2><blockquote>
+<p>[root@master conf]# <code>vi /usr/local/flume-1.7.0/conf/netcat-logger.conf</code></p>
+</blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"># 定义这个agent中各组件的名字</span><br><span class="line">a1.sources = r1</span><br><span class="line">a1.sinks = k1</span><br><span class="line">a1.channels = c1</span><br><span class="line"></span><br><span class="line"># 描述和配置source组件：r1</span><br><span class="line">a1.sources.r1.type = netcat</span><br><span class="line">a1.sources.r1.bind = 192.168.0.130</span><br><span class="line">a1.sources.r1.port = 44444</span><br><span class="line"></span><br><span class="line"># 描述和配置sink组件：k1</span><br><span class="line">a1.sinks.k1.type = logger</span><br><span class="line"></span><br><span class="line"># 描述和配置channel组件，此处使用是内存缓存的方式</span><br><span class="line">a1.channels.c1.type = memory</span><br><span class="line">a1.channels.c1.capacity = 1000</span><br><span class="line">a1.channels.c1.transactionCapacity = 100</span><br><span class="line"></span><br><span class="line"># 描述和配置source  channel   sink之间的连接关系</span><br><span class="line">a1.sources.r1.channels = c1</span><br><span class="line">a1.sinks.k1.channel = c1</span><br></pre></td></tr></table></figure>
 
 <h2 id="3-2-启动配置文件"><a href="#3-2-启动配置文件" class="headerlink" title="3.2 启动配置文件"></a>3.2 启动配置文件</h2><p>指定采集方案配置文件，在相应的节点上启动flume agent</p>
