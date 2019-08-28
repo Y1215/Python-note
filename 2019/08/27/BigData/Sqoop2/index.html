@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Y">
 <meta property="og:description" content="Sqoop的使用">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-27T08:38:07.086Z">
+<meta property="og:updated_time" content="2019-08-28T03:04:15.147Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Sqoop(二)">
 <meta name="twitter:description" content="Sqoop的使用">
@@ -347,7 +347,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  398 字
+                  593 字
                 </span>
               
 
@@ -363,7 +363,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2 分钟
+                  3 分钟
                 </span>
               
             </div>
@@ -390,8 +390,20 @@
 </blockquote>
 <h1 id="2-测试数据库"><a href="#2-测试数据库" class="headerlink" title="2.测试数据库"></a>2.测试数据库</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">CREATE DATABASE userdb;</span><br><span class="line">USE userdb;</span><br><span class="line"></span><br><span class="line">SET FOREIGN_KEY_CHECKS=0;</span><br><span class="line"></span><br><span class="line">-- ----------------------------</span><br><span class="line">-- Table structure for `emp`</span><br><span class="line">-- ----------------------------</span><br><span class="line">DROP TABLE IF EXISTS `emp`;</span><br><span class="line">CREATE TABLE `emp` (</span><br><span class="line">  `id` int(11) DEFAULT NULL,</span><br><span class="line">  `name` varchar(100) DEFAULT NULL,</span><br><span class="line">  `deg` varchar(100) DEFAULT NULL,</span><br><span class="line">  `salary` int(11) DEFAULT NULL,</span><br><span class="line">  `dept` varchar(10) DEFAULT NULL</span><br><span class="line">) ENGINE=InnoDB DEFAULT CHARSET=latin1;</span><br><span class="line"></span><br><span class="line">-- ----------------------------</span><br><span class="line">-- Records of emp</span><br><span class="line">-- ----------------------------</span><br><span class="line">INSERT INTO `emp` VALUES (&apos;1201&apos;, &apos;gopal&apos;, &apos;manager&apos;, &apos;50000&apos;, &apos;TP&apos;);</span><br><span class="line">INSERT INTO `emp` VALUES (&apos;1202&apos;, &apos;manisha&apos;, &apos;Proof reader&apos;, &apos;50000&apos;, &apos;TP&apos;);</span><br><span class="line">INSERT INTO `emp` VALUES (&apos;1203&apos;, &apos;khalil&apos;, &apos;php dev&apos;, &apos;30000&apos;, &apos;AC&apos;);</span><br><span class="line">INSERT INTO `emp` VALUES (&apos;1204&apos;, &apos;prasanth&apos;, &apos;php dev&apos;, &apos;30000&apos;, &apos;AC&apos;);</span><br><span class="line">INSERT INTO `emp` VALUES (&apos;1205&apos;, &apos;kranthi&apos;, &apos;admin&apos;, &apos;20000&apos;, &apos;TP&apos;);</span><br><span class="line"></span><br><span class="line">-- ----------------------------</span><br><span class="line">-- Table structure for `emp_add`</span><br><span class="line">-- ----------------------------</span><br><span class="line">DROP TABLE IF EXISTS `emp_add`;</span><br><span class="line">CREATE TABLE `emp_add` (</span><br><span class="line">  `id` int(11) DEFAULT NULL,</span><br><span class="line">  `hno` varchar(100) DEFAULT NULL,</span><br><span class="line">  `street` varchar(100) DEFAULT NULL,</span><br><span class="line">  `city` varchar(100) DEFAULT NULL</span><br><span class="line">) ENGINE=InnoDB DEFAULT CHARSET=latin1;</span><br><span class="line"></span><br><span class="line">-- ----------------------------</span><br><span class="line">-- Records of emp_add</span><br><span class="line">-- ----------------------------</span><br><span class="line">INSERT INTO `emp_add` VALUES (&apos;1201&apos;, &apos;288A&apos;, &apos;vgiri&apos;, &apos;jublee&apos;);</span><br><span class="line">INSERT INTO `emp_add` VALUES (&apos;1202&apos;, &apos;108I&apos;, &apos;aoc&apos;, &apos;sec-bad&apos;);</span><br><span class="line">INSERT INTO `emp_add` VALUES (&apos;1203&apos;, &apos;144Z&apos;, &apos;pgutta&apos;, &apos;hyd&apos;);</span><br><span class="line">INSERT INTO `emp_add` VALUES (&apos;1204&apos;, &apos;78B&apos;, &apos;old city&apos;, &apos;sec-bad&apos;);</span><br><span class="line">INSERT INTO `emp_add` VALUES (&apos;1205&apos;, &apos;720X&apos;, &apos;hitec&apos;, &apos;sec-bad&apos;);</span><br><span class="line"></span><br><span class="line">-- ----------------------------</span><br><span class="line">-- Table structure for `emp_conn`</span><br><span class="line">-- ----------------------------</span><br><span class="line">DROP TABLE IF EXISTS `emp_conn`;</span><br><span class="line">CREATE TABLE `emp_conn` (</span><br><span class="line">  `id` int(100) DEFAULT NULL,</span><br><span class="line">  `phno` varchar(100) DEFAULT NULL,</span><br><span class="line">  `email` varchar(100) DEFAULT NULL</span><br><span class="line">) ENGINE=InnoDB DEFAULT CHARSET=latin1;</span><br><span class="line"></span><br><span class="line">-- ----------------------------</span><br><span class="line">-- Records of emp_conn</span><br><span class="line">-- ----------------------------</span><br><span class="line">INSERT INTO `emp_conn` VALUES (&apos;1201&apos;, &apos;2356742&apos;, &apos;gopal@tp.com&apos;);</span><br><span class="line">INSERT INTO `emp_conn` VALUES (&apos;1202&apos;, &apos;1661663&apos;, &apos;manisha@tp.com&apos;);</span><br><span class="line">INSERT INTO `emp_conn` VALUES (&apos;1203&apos;, &apos;8887776&apos;, &apos;khalil@ac.com&apos;);</span><br><span class="line">INSERT INTO `emp_conn` VALUES (&apos;1204&apos;, &apos;9988774&apos;, &apos;prasanth@ac.com&apos;);</span><br><span class="line">INSERT INTO `emp_conn` VALUES (&apos;1205&apos;, &apos;1231231&apos;, &apos;kranthi@tp.com&apos;);</span><br></pre></td></tr></table></figure>
 
-<p>sqoop list-databases –connect jdbc:mysql://localhost:3306/ –username root –password 12345678</p>
-<p>sqoop import  –connect jdbc:mysql://localhost:3306/userdb –username root –password 12345678 –delete-target-dir –table emp  –target-dir /sqoop/emp –m 1</p>
+<h1 id="3-从mysql导入到HDFS指定目录"><a href="#3-从mysql导入到HDFS指定目录" class="headerlink" title="3.从mysql导入到HDFS指定目录"></a>3.从mysql导入到HDFS指定目录</h1><p>使用参数 <code>--target-dir</code>来指定导出目的地，<br>使用参数 <code>--delete-target-dir</code>来判断导出目录是否存在，如果存在就删掉</p>
+<blockquote>
+<p>[root@master ～]# <code>sqoop import  --connect jdbc:mysql://192.168.0.130:3306/userdb --username root --password 12345678 --delete-target-dir --table emp  --target-dir /sqoop/emp --m 1</code></p>
+</blockquote>
+<p>查看导出的数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@master ～]# hdfs dfs -text /sqoop/emp/part-m-00000</span><br><span class="line">1201,gopal,manager,50000,TP</span><br><span class="line">1202,manisha,Proof reader,50000,TP</span><br><span class="line">1203,khalil,php dev,30000,AC</span><br><span class="line">1204,prasanth,php dev,30000,AC</span><br><span class="line">1205,kranthi,admin,20000,TP</span><br></pre></td></tr></table></figure>
+
+<p>默认数据之间分隔符为”,”,自定义分隔符</p>
+<blockquote>
+<p>[root@master ～]# <code>sqoop import  --connect jdbc:mysql://192.168.0.130:3306/userdb --username root --password 12345678 --delete-target-dir --table emp  --target-dir /sqoop/emp2 --m 1 --fields-terminated-by &#39;\t&#39;</code></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@master conf]# hdfs dfs -text /sqoop/emp2/part-m-00000</span><br><span class="line">1201	gopal	manager	50000	TP</span><br><span class="line">1202	manisha	Proof reader	50000	TP</span><br><span class="line">1203	khalil	php dev	30000	AC</span><br><span class="line">1204	prasanth	php dev	30000	AC</span><br><span class="line">1205	kranthi	admin	20000	TP</span><br></pre></td></tr></table></figure>
+
+<h1 id="4-mysql导入到HIVE"><a href="#4-mysql导入到HIVE" class="headerlink" title="4.mysql导入到HIVE"></a>4.mysql导入到HIVE</h1><p>未完待续···</p>
 
       
     </div>
@@ -433,6 +445,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/28/BigData/Flume1/" rel="prev" title="Flume(一)">
+                Flume(一) <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -511,7 +527,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -522,7 +538,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -533,7 +549,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -580,7 +596,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Sqoop的使用"><span class="nav-text">Sqoop的使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-列出所有的数据库"><span class="nav-text">1.列出所有的数据库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-测试数据库"><span class="nav-text">2.测试数据库</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Sqoop的使用"><span class="nav-text">Sqoop的使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-列出所有的数据库"><span class="nav-text">1.列出所有的数据库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-测试数据库"><span class="nav-text">2.测试数据库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-从mysql导入到HDFS指定目录"><span class="nav-text">3.从mysql导入到HDFS指定目录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-mysql导入到HIVE"><span class="nav-text">4.mysql导入到HIVE</span></a></li></ol></div>
             
 
           </div>

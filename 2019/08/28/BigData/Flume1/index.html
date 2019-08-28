@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="BigData,Flume,">
 
 
 
@@ -79,13 +79,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Y">
-<meta property="og:url" content="http://yoursite.com/page/2/index.html">
+<meta name="description" content="Flume安装">
+<meta name="keywords" content="BigData,Flume">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flume(一)">
+<meta property="og:url" content="http://yoursite.com/2019/08/28/BigData/Flume1/index.html">
 <meta property="og:site_name" content="Y">
+<meta property="og:description" content="Flume安装">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-08-28T03:45:54.092Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Y">
+<meta name="twitter:title" content="Flume(一)">
+<meta name="twitter:description" content="Flume安装">
 
 
 
@@ -115,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/page/2/">
+  <link rel="canonical" href="http://yoursite.com/2019/08/28/BigData/Flume1/">
 
 
 
 
 
-  <title>Y</title>
+  <title>Flume(一) | Y</title>
   
 
 
@@ -140,8 +145,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -234,9 +238,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -249,7 +253,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/21/BigData/Hadoop1/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/28/BigData/Flume1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="YL">
@@ -266,9 +270,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/08/21/BigData/Hadoop1/" itemprop="url">Hadoop(一)</a></h1>
+          <h1 class="post-title" itemprop="name headline">Flume(一)</h1>
         
 
         <div class="post-meta">
@@ -280,8 +282,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-21T20:57:49+08:00">
-                2019-08-21
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-28T11:04:54+08:00">
+                2019-08-28
               </time>
             
 
@@ -314,8 +316,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/BigData/Hadoop/" itemprop="url" rel="index">
-                    <span itemprop="name">Hadoop</span>
+                  <a href="/categories/BigData/Flume/" itemprop="url" rel="index">
+                    <span itemprop="name">Flume</span>
                   </a>
                 </span>
 
@@ -345,7 +347,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,322 字
+                  392 字
                 </span>
               
 
@@ -361,7 +363,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  7 分钟
+                  2 分钟
                 </span>
               
             </div>
@@ -382,16 +384,31 @@
       
 
       
-        
-          <h1 id="Hadoop集群搭建"><a href="#Hadoop集群搭建" class="headerlink" title="Hadoop集群搭建"></a><center>Hadoop集群搭建</center></h1>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/08/21/BigData/Hadoop1/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+        <h1 id="Flume安装"><a href="#Flume安装" class="headerlink" title="Flume安装"></a><center>Flume安装</center></h1><a id="more"></a>
+
+<h1 id="1-下载并解压至-usr-local"><a href="#1-下载并解压至-usr-local" class="headerlink" title="1.下载并解压至/usr/local/"></a>1.下载并解压至/usr/local/</h1><p><a href="http://archive.apache.org/dist/flume/1.7.0/apache-flume-1.7.0-bin.tar.gz" target="_blank" rel="noopener">http://archive.apache.org/dist/flume/1.7.0/apache-flume-1.7.0-bin.tar.gz</a></p>
+<h1 id="2-配置flume-env-sh"><a href="#2-配置flume-env-sh" class="headerlink" title="2.配置flume-env.sh"></a>2.配置flume-env.sh</h1><blockquote>
+<p>[root@master ~]# <code>cd /usr/local/flume-1.7.0/conf/</code><br>[root@master conf]# <code>cp flume-env.sh.template flume-env.sh</code><br>[root@master conf]# <code>vi flume-env.sh</code></p>
+</blockquote>
+<p>添加信息<br><code>export JAVA_HOME=/usr/local/jdk1.8.0_221</code></p>
+<h1 id="3-开发配置文件"><a href="#3-开发配置文件" class="headerlink" title="3.开发配置文件"></a>3.开发配置文件</h1><p>[root@master conf]# vi /usr/local/flume-1.7.0/conf/netcat-logger.conf</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"># 定义这个agent中各组件的名字</span><br><span class="line">a1.sources = r1</span><br><span class="line">a1.sinks = k1</span><br><span class="line">a1.channels = c1</span><br><span class="line"></span><br><span class="line"># 描述和配置source组件：r1</span><br><span class="line">a1.sources.r1.type = netcat</span><br><span class="line">a1.sources.r1.bind = 192.168.0.130</span><br><span class="line">a1.sources.r1.port = 44444</span><br><span class="line"></span><br><span class="line"># 描述和配置sink组件：k1</span><br><span class="line">a1.sinks.k1.type = logger</span><br><span class="line"></span><br><span class="line"># 描述和配置channel组件，此处使用是内存缓存的方式</span><br><span class="line">a1.channels.c1.type = memory</span><br><span class="line">a1.channels.c1.capacity = 1000</span><br><span class="line">a1.channels.c1.transactionCapacity = 100</span><br><span class="line"></span><br><span class="line"># 描述和配置source  channel   sink之间的连接关系</span><br><span class="line">a1.sources.r1.channels = c1</span><br><span class="line">a1.sinks.k1.channel = c1</span><br></pre></td></tr></table></figure>
+
+<h1 id="4-启动配置文件"><a href="#4-启动配置文件" class="headerlink" title="4.启动配置文件"></a>4.启动配置文件</h1><p>指定采集方案配置文件，在相应的节点上启动flume agent</p>
+<blockquote>
+<p>[root@master ~]# <code>bin/flume-ng agent -c conf -f conf/netcat-logger.conf -n a1  -Dflume.root.logger=INFO,console</code></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-c conf   指定flume自身的配置文件所在目录</span><br><span class="line">-f conf/netcat-logger.con  指定我们所描述的采集方案</span><br><span class="line">-n a1  指定我们这个agent的名字</span><br></pre></td></tr></table></figure>
+
+<h1 id="5-测试"><a href="#5-测试" class="headerlink" title="5.测试"></a>5.测试</h1><p>在slave1安装telnet</p>
+<blockquote>
+<p>[root@slave1 ~]# <code>yum -y install telnet</code></p>
+</blockquote>
+<p>slave1</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@slave1 ~]# telnet master 44444</span><br><span class="line">Trying 192.168.0.130...</span><br><span class="line">Connected to master.</span><br><span class="line">Escape character is &apos;^]&apos;.</span><br><span class="line">hello</span><br><span class="line">OK</span><br></pre></td></tr></table></figure>
+
+<p>master<br><code>19/08/28 11:42:34 INFO sink.LoggerSink: Event: { headers:{} body: 68 65 6C 6C 6F 0D                               hello. }</code></p>
+
       
     </div>
     
@@ -406,346 +423,38 @@
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/22/Python/django-note/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="YL">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Y">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/22/Python/django-note/" itemprop="url">django-note</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-22T20:21:34+08:00">
-                2019-05-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
+        <div class="post-tags">
           
-
+            <a href="/tags/BigData/" rel="tag"># BigData</a>
           
-            
+            <a href="/tags/Flume/" rel="tag"># Flume</a>
           
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  257 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
         </div>
-      </header>
-    
+      
 
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
+      
       
       
 
       
-        
-          <center>ubuntu中创建django</center>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/05/22/Python/django-note/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/27/BigData/Sqoop2/" rel="next" title="Sqoop(二)">
+                <i class="fa fa-chevron-left"></i> Sqoop(二)
+              </a>
+            
           </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
 
-    
+          <span class="post-nav-divider"></span>
 
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/22/Python/python-note2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="YL">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Y">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/22/Python/python-note2/" itemprop="url">python-note2</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+          <div class="post-nav-prev post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-22T09:33:01+08:00">
-                2019-05-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index">
-                    <span itemprop="name">Python</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  1,531 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  6 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          <center>Map、Filter、reduce、os模块、time模块、正则表达、异常处理</center>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/05/22/Python/python-note2/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -755,169 +464,11 @@
   </article>
 
 
-    
-      
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/22/Python/python-note1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="YL">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Y">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/22/Python/python-note1/" itemprop="url">python-note1</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-22T09:12:32+08:00">
-                2019-05-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  771 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  3 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <center>字符串、容器型态、比较运算、语法与函数</center>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/05/22/Python/python-note1/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+    <div class="post-spread">
       
     </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
   </div>
-  
-  
-  
-  </article>
-
-
-    
-  </section>
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
-  </nav>
-
 
 
           </div>
@@ -925,6 +476,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -945,8 +500,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -1022,6 +586,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Flume安装"><span class="nav-text">Flume安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-下载并解压至-usr-local"><span class="nav-text">1.下载并解压至/usr/local/</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-配置flume-env-sh"><span class="nav-text">2.配置flume-env.sh</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-开发配置文件"><span class="nav-text">3.开发配置文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-启动配置文件"><span class="nav-text">4.启动配置文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-测试"><span class="nav-text">5.测试</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -1163,6 +743,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
