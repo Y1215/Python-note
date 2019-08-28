@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Y">
 <meta property="og:description" content="Sqoop的使用">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-28T03:04:15.147Z">
+<meta property="og:updated_time" content="2019-08-28T10:57:22.543Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Sqoop(二)">
 <meta name="twitter:description" content="Sqoop的使用">
@@ -347,7 +347,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  593 字
+                  1,474 字
                 </span>
               
 
@@ -363,7 +363,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3 分钟
+                  8 分钟
                 </span>
               
             </div>
@@ -403,7 +403,85 @@
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@master conf]# hdfs dfs -text /sqoop/emp2/part-m-00000</span><br><span class="line">1201	gopal	manager	50000	TP</span><br><span class="line">1202	manisha	Proof reader	50000	TP</span><br><span class="line">1203	khalil	php dev	30000	AC</span><br><span class="line">1204	prasanth	php dev	30000	AC</span><br><span class="line">1205	kranthi	admin	20000	TP</span><br></pre></td></tr></table></figure>
 
-<h1 id="4-mysql导入到HIVE"><a href="#4-mysql导入到HIVE" class="headerlink" title="4.mysql导入到HIVE"></a>4.mysql导入到HIVE</h1><p>未完待续···</p>
+<h1 id="4-mysql导入到HIVE"><a href="#4-mysql导入到HIVE" class="headerlink" title="4.mysql导入到HIVE"></a>4.mysql导入到HIVE</h1><h2 id="4-1-导入所需jar包"><a href="#4-1-导入所需jar包" class="headerlink" title="4.1 导入所需jar包"></a>4.1 导入所需jar包</h2><blockquote>
+<p>[root@master ~]# <code>cp /usr/local/hive-2.3.5/lib/hive-exec-2.3.5.jar /usr/local/sqoop-1.4.6/lib/</code></p>
+</blockquote>
+<h2 id="4-2-在Hive中创建数据库与表"><a href="#4-2-在Hive中创建数据库与表" class="headerlink" title="4.2 在Hive中创建数据库与表"></a>4.2 在Hive中创建数据库与表</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# hive</span><br><span class="line">hive&gt; create database sqooptohive;</span><br><span class="line">hive&gt; use sqooptohive;</span><br><span class="line">hive&gt; create external table emp_hive(id int,name string,deg string,salary int ,dept string) row format delimited fields terminated by &apos;\001&apos;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-3-导入数据"><a href="#4-3-导入数据" class="headerlink" title="4.3 导入数据"></a>4.3 导入数据</h2><blockquote>
+<p>[root@master ~]# <code>sqoop import --connect jdbc:mysql://192.168.0.130:3306/userdb --username root --password 12345678 --table emp --fields-terminated-by &#39;\001&#39; --hive-import --hive-table sqooptohive.emp_hive --hive-overwrite --delete-target-dir --m 1</code></p>
+</blockquote>
+<h2 id="4-4-hive表查看"><a href="#4-4-hive表查看" class="headerlink" title="4.4 hive表查看"></a>4.4 hive表查看</h2><p><code>hive&gt; select * from emp_hive;</code></p>
+<h2 id="4-5-导入关系表到hive并自动创建hive表"><a href="#4-5-导入关系表到hive并自动创建hive表" class="headerlink" title="4.5 导入关系表到hive并自动创建hive表"></a>4.5 导入关系表到hive并自动创建hive表</h2><blockquote>
+<p>[root@master ~]# <code>sqoop import --connect jdbc:mysql://192.168.0.130:3306/userdb --username root --password 12345678 --table emp_conn --hive-import -m 1 --hive-database sqooptohive;</code></p>
+</blockquote>
+<h1 id="5-导入hdfs"><a href="#5-导入hdfs" class="headerlink" title="5.导入hdfs"></a>5.导入hdfs</h1><h2 id="5-1-导入表数据子集"><a href="#5-1-导入表数据子集" class="headerlink" title="5.1 导入表数据子集"></a>5.1 导入表数据子集</h2><p>使用”where”子句的一个子集，它执行在各自的数据库服务器相应的SQL查询，并将结果存储在HDFS的目标目录。<br>where子句的语法——<code>--where &lt;condition&gt;</code></p>
+<ul>
+<li>按照条件进行查找，通过<code>--where</code>参数来查找表emp_add当中city字段的值为sec-bad的所有数据导入到hdfs上面去<blockquote>
+<p>[root@master ~]# <code>sqoop import --connect jdbc:mysql://192.168.0.130:3306/userdb --username root --password 12345678 --table emp_add --target-dir /sqoop/emp_add -m 1  --delete-target-dir --where &quot;city = &#39;sec-bad&#39;&quot;</code></p>
+</blockquote>
+</li>
+</ul>
+<h2 id="5-2-sql语句查找导入hdfs"><a href="#5-2-sql语句查找导入hdfs" class="headerlink" title="5.2 sql语句查找导入hdfs"></a>5.2 sql语句查找导入hdfs</h2><p>通过<code>-–query</code>参数来指定我们的sql语句，通过sql语句来过滤数据进行导入</p>
+<blockquote>
+<p>[root@master ~]# <code>sqoop import --connect jdbc:mysql://192.168.0.130:3306/userdb --username root --password 12345678 --delete-target-dir -m 1 --query &#39;select phno from emp_conn where 1=1 and $CONDITIONS&#39; --target-dir /sqoop/emp_conn</code></p>
+</blockquote>
+<ul>
+<li><p>注意</p>
+<ul>
+<li>使用sql语句来进行查找是不能加参数–table </li>
+<li>必须要添加where条件，</li>
+<li>where条件后面必须带一个$CONDITIONS 这个字符串，</li>
+<li>sql语句必须用单引号，不能用双引号</li>
+</ul>
+</li>
+<li><p>查看hdfs上的内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# hdfs dfs -text /sqoop/emp_conn/part*</span><br><span class="line">2356742</span><br><span class="line">1661663</span><br><span class="line">8887776</span><br><span class="line">9988774</span><br><span class="line">1231231</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="5-3-增量导入"><a href="#5-3-增量导入" class="headerlink" title="5.3 增量导入"></a>5.3 增量导入</h2><p>Sqoop导入命令增量选项的语法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">--incremental &lt;mode&gt;</span><br><span class="line">--check-column &lt;column name&gt;</span><br><span class="line">--last value &lt;last check column value&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-3-1-使用上面的选项来实现"><a href="#5-3-1-使用上面的选项来实现" class="headerlink" title="5.3.1 使用上面的选项来实现"></a>5.3.1 使用上面的选项来实现</h3><ul>
+<li><p>导入emp表当中id大于1202的所有数据</p>
+<ul>
+<li>注意：增量导入的时候，一定不能加参数–delete-target-dir否则会报错<blockquote>
+<p>[root@master ~]# <code>sqoop import --connect jdbc:mysql://192.168.0.130:3306/userdb --username root --password 12345678 --table emp --incremental append --check-column id --last-value 1202 -m 1 --target-dir /sqoop/increment</code></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>查看数据内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# hdfs dfs -text /sqoop/increment/part*</span><br><span class="line">php dev,AC,1203,khalil,30000</span><br><span class="line">php dev,AC,1204,prasanth,30000</span><br><span class="line">admin,TP,1205,kranthi,20000</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<h3 id="5-3-2-通过-where条件来实现——选取的数据会更加精准"><a href="#5-3-2-通过-where条件来实现——选取的数据会更加精准" class="headerlink" title="5.3.2 通过--where条件来实现——选取的数据会更加精准"></a>5.3.2 通过<code>--where</code>条件来实现——选取的数据会更加精准</h3><blockquote>
+<p>[root@master ~]# <code>sqoop import --connect jdbc:mysql://192.168.0.130:3306/userdb --username root --password 12345678  --table emp --incremental append  --where &quot;create_time &gt; &#39;2019-06-17 00:00:00&#39; and is_delete=&#39;1&#39; and create_time &lt; &#39;2019-09-17 23:59:59&#39;&quot; --target-dir /sqoop/incement2 --check-column id  --m 1</code></p>
+</blockquote>
+<h1 id="6-将数据从HDFS把文件导出到MYSQL"><a href="#6-将数据从HDFS把文件导出到MYSQL" class="headerlink" title="6.将数据从HDFS把文件导出到MYSQL"></a>6.将数据从HDFS把文件导出到MYSQL</h1><ul>
+<li>注意<ul>
+<li>导出前，目标表必须存在于目标数据库中。</li>
+<li>默认操作是从将文件中的数据使用INSERT语句插入到表中</li>
+<li>更新模式下，是生成UPDATE语句更新表数据<h2 id="6-1-查看hdfs目录-sqoop-emp下的数据内容"><a href="#6-1-查看hdfs目录-sqoop-emp下的数据内容" class="headerlink" title="6.1 查看hdfs目录/sqoop/emp下的数据内容"></a>6.1 查看hdfs目录/sqoop/emp下的数据内容</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1201,gopal,manager,50000,TP</span><br><span class="line">1202,manisha,Proof reader,50000,TP</span><br><span class="line">1203,khalil,php dev,30000,AC</span><br><span class="line">1204,prasanth,php dev,30000,AC</span><br><span class="line">1205,kranthi,admin,20000,TP</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="6-2-创建mysql表"><a href="#6-2-创建mysql表" class="headerlink" title="6.2 创建mysql表"></a>6.2 创建mysql表</h2><blockquote>
+<p>mysql&gt; </p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE `emp_out` (`id` INT(11) DEFAULT NULL,`name` VARCHAR(100) DEFAULT NULL,`deg` VARCHAR(100) DEFAULT NULL,`salary` INT(11) DEFAULT NULL,`dept` VARCHAR(10) DEFAULT NULL) ENGINE=INNODB DEFAULT CHARSET=utf8;</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-3-执行导出命令"><a href="#6-3-执行导出命令" class="headerlink" title="6.3 执行导出命令"></a>6.3 执行导出命令</h2><blockquote>
+<p>[root@master ~]# <code>sqoop export --connect jdbc:mysql://192.168.0.130:3306/userdb --username root --password 12345678 --table emp_out --export-dir /sqoop/emp --input-fields-terminated-by &quot;,&quot;</code></p>
+</blockquote>
+<h2 id="6-4-验证mysql表数据"><a href="#6-4-验证mysql表数据" class="headerlink" title="6.4 验证mysql表数据"></a>6.4 验证mysql表数据</h2><blockquote>
+<p>mysql&gt; <code>select * from emp_out</code></p>
+</blockquote>
 
       
     </div>
@@ -596,7 +674,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Sqoop的使用"><span class="nav-text">Sqoop的使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-列出所有的数据库"><span class="nav-text">1.列出所有的数据库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-测试数据库"><span class="nav-text">2.测试数据库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-从mysql导入到HDFS指定目录"><span class="nav-text">3.从mysql导入到HDFS指定目录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-mysql导入到HIVE"><span class="nav-text">4.mysql导入到HIVE</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Sqoop的使用"><span class="nav-text">Sqoop的使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-列出所有的数据库"><span class="nav-text">1.列出所有的数据库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-测试数据库"><span class="nav-text">2.测试数据库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-从mysql导入到HDFS指定目录"><span class="nav-text">3.从mysql导入到HDFS指定目录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-mysql导入到HIVE"><span class="nav-text">4.mysql导入到HIVE</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-导入所需jar包"><span class="nav-text">4.1 导入所需jar包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-在Hive中创建数据库与表"><span class="nav-text">4.2 在Hive中创建数据库与表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-导入数据"><span class="nav-text">4.3 导入数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-4-hive表查看"><span class="nav-text">4.4 hive表查看</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-5-导入关系表到hive并自动创建hive表"><span class="nav-text">4.5 导入关系表到hive并自动创建hive表</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-导入hdfs"><span class="nav-text">5.导入hdfs</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-导入表数据子集"><span class="nav-text">5.1 导入表数据子集</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-sql语句查找导入hdfs"><span class="nav-text">5.2 sql语句查找导入hdfs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-3-增量导入"><span class="nav-text">5.3 增量导入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-1-使用上面的选项来实现"><span class="nav-text">5.3.1 使用上面的选项来实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-2-通过-where条件来实现——选取的数据会更加精准"><span class="nav-text">5.3.2 通过--where条件来实现——选取的数据会更加精准</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-将数据从HDFS把文件导出到MYSQL"><span class="nav-text">6.将数据从HDFS把文件导出到MYSQL</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#6-1-查看hdfs目录-sqoop-emp下的数据内容"><span class="nav-text">6.1 查看hdfs目录/sqoop/emp下的数据内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-2-创建mysql表"><span class="nav-text">6.2 创建mysql表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-3-执行导出命令"><span class="nav-text">6.3 执行导出命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-4-验证mysql表数据"><span class="nav-text">6.4 验证mysql表数据</span></a></li></ol></li></ol></div>
             
 
           </div>
