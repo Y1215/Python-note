@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Y">
 <meta property="og:description" content="Flume安装">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-28T03:45:54.092Z">
+<meta property="og:updated_time" content="2019-08-28T06:12:14.786Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Flume(一)">
 <meta name="twitter:description" content="Flume安装">
@@ -347,7 +347,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  392 字
+                  402 字
                 </span>
               
 
@@ -391,16 +391,16 @@
 <p>[root@master ~]# <code>cd /usr/local/flume-1.7.0/conf/</code><br>[root@master conf]# <code>cp flume-env.sh.template flume-env.sh</code><br>[root@master conf]# <code>vi flume-env.sh</code></p>
 </blockquote>
 <p>添加信息<br><code>export JAVA_HOME=/usr/local/jdk1.8.0_221</code></p>
-<h1 id="3-开发配置文件"><a href="#3-开发配置文件" class="headerlink" title="3.开发配置文件"></a>3.开发配置文件</h1><p>[root@master conf]# vi /usr/local/flume-1.7.0/conf/netcat-logger.conf</p>
+<h1 id="3-监控端口数据"><a href="#3-监控端口数据" class="headerlink" title="3.监控端口数据"></a>3.监控端口数据</h1><h2 id="3-1-开发配置文件"><a href="#3-1-开发配置文件" class="headerlink" title="3.1 开发配置文件"></a>3.1 开发配置文件</h2><p>[root@master conf]# vi /usr/local/flume-1.7.0/conf/netcat-logger.conf</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"># 定义这个agent中各组件的名字</span><br><span class="line">a1.sources = r1</span><br><span class="line">a1.sinks = k1</span><br><span class="line">a1.channels = c1</span><br><span class="line"></span><br><span class="line"># 描述和配置source组件：r1</span><br><span class="line">a1.sources.r1.type = netcat</span><br><span class="line">a1.sources.r1.bind = 192.168.0.130</span><br><span class="line">a1.sources.r1.port = 44444</span><br><span class="line"></span><br><span class="line"># 描述和配置sink组件：k1</span><br><span class="line">a1.sinks.k1.type = logger</span><br><span class="line"></span><br><span class="line"># 描述和配置channel组件，此处使用是内存缓存的方式</span><br><span class="line">a1.channels.c1.type = memory</span><br><span class="line">a1.channels.c1.capacity = 1000</span><br><span class="line">a1.channels.c1.transactionCapacity = 100</span><br><span class="line"></span><br><span class="line"># 描述和配置source  channel   sink之间的连接关系</span><br><span class="line">a1.sources.r1.channels = c1</span><br><span class="line">a1.sinks.k1.channel = c1</span><br></pre></td></tr></table></figure>
 
-<h1 id="4-启动配置文件"><a href="#4-启动配置文件" class="headerlink" title="4.启动配置文件"></a>4.启动配置文件</h1><p>指定采集方案配置文件，在相应的节点上启动flume agent</p>
+<h2 id="3-2-启动配置文件"><a href="#3-2-启动配置文件" class="headerlink" title="3.2 启动配置文件"></a>3.2 启动配置文件</h2><p>指定采集方案配置文件，在相应的节点上启动flume agent</p>
 <blockquote>
 <p>[root@master ~]# <code>bin/flume-ng agent -c conf -f conf/netcat-logger.conf -n a1  -Dflume.root.logger=INFO,console</code></p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-c conf   指定flume自身的配置文件所在目录</span><br><span class="line">-f conf/netcat-logger.con  指定我们所描述的采集方案</span><br><span class="line">-n a1  指定我们这个agent的名字</span><br></pre></td></tr></table></figure>
 
-<h1 id="5-测试"><a href="#5-测试" class="headerlink" title="5.测试"></a>5.测试</h1><p>在slave1安装telnet</p>
+<h2 id="3-3-测试"><a href="#3-3-测试" class="headerlink" title="3.3 测试"></a>3.3 测试</h2><p>在slave1安装telnet</p>
 <blockquote>
 <p>[root@slave1 ~]# <code>yum -y install telnet</code></p>
 </blockquote>
@@ -449,6 +449,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/28/BigData/Flume2/" rel="prev" title="Flume(二)">
+                Flume(二) <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -527,7 +531,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -596,7 +600,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Flume安装"><span class="nav-text">Flume安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-下载并解压至-usr-local"><span class="nav-text">1.下载并解压至/usr/local/</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-配置flume-env-sh"><span class="nav-text">2.配置flume-env.sh</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-开发配置文件"><span class="nav-text">3.开发配置文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-启动配置文件"><span class="nav-text">4.启动配置文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-测试"><span class="nav-text">5.测试</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Flume安装"><span class="nav-text">Flume安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-下载并解压至-usr-local"><span class="nav-text">1.下载并解压至/usr/local/</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-配置flume-env-sh"><span class="nav-text">2.配置flume-env.sh</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-监控端口数据"><span class="nav-text">3.监控端口数据</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-开发配置文件"><span class="nav-text">3.1 开发配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-启动配置文件"><span class="nav-text">3.2 启动配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-测试"><span class="nav-text">3.3 测试</span></a></li></ol></li></ol></div>
             
 
           </div>
